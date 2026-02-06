@@ -109,14 +109,6 @@ npm run lint
 
 No se requieren variables de entorno para el proyecto base.
 
-## 📝 Guías de Implementación
-
-Consulta la documentación completa en `/docs`:
-
-- `ARQUITECTURA.md` - Arquitectura del proyecto
-- `GUIA_IMPLEMENTACION.md` - Guía paso a paso
-- `RESUMEN_EJECUTIVO.md` - Resumen ejecutivo
-
 ## 🎨 Design System
 
 El proyecto incluye un sistema de diseño completo con:
