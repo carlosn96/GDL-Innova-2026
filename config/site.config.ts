@@ -51,7 +51,7 @@ export const siteConfig = {
   },
   
   external: {
-    favicon: 'https://supervision-docente.joannesystem.com/public/assets/images/logos/favicon.ico',
+    favicon: '/favicon.ico',
     calendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=GDL%20Innova%20Hackathon%202026%20-%20A&dates=20260203T160000Z/20260204T213000Z&details=%C2%A1Prep%C3%A1rate%20para%20una%20experiencia%20electrizante%20que%20fusi%C3%B3na%20la%20creatividad%20humana%20con%20la%20inteligencia%20artificial!%20Sum%C3%A9rgete%20en%20el%20epicentro%20de%20la%20innovaci%C3%B3n%2C%20donde%20tus%20ideas%20cobrar%C3%A1n%20vida%20en%20proyectos%20reales%20que%20transformar%C3%A1n%20Guadalajara%20y%20catapultar%C3%A1n%20tu%20carrera%20hacia%20el%20futuro%20digital.&location=Universidad%20UNE%2C%20Guadalajara%2C%20Jalisco%2C%20M%C3%A9xico'
   }
 } as const;
