@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   description: siteConfig.metadata.description,
   keywords: [...siteConfig.metadata.keywords],
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
+    icon: { url: '/favicon.ico', type: 'image/x-icon' },
+    shortcut: { url: '/favicon.ico', type: 'image/x-icon' },
   },
 };
 
