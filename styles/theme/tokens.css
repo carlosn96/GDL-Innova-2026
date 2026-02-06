@@ -1,0 +1,114 @@
+/**
+ * Design Tokens - Variables CSS Centralizadas
+ * 
+ * Define todas las variables de diseño para evitar valores hardcodeados
+ * en los estilos y garantizar consistencia visual.
+ */
+
+:root {
+  /* === COLORS === */
+  
+  /* Primary Colors */
+  --color-cyan-100: #e0f7ff;
+  --color-cyan-200: #b3ecff;
+  --color-cyan-300: #86e1ff;
+  --color-cyan-400: #00f2fe;
+  --color-cyan-500: #00c9db;
+  --color-cyan-600: #00a0b8;
+
+  --color-purple-100: #f3e8ff;
+  --color-purple-200: #e9d5ff;
+  --color-purple-300: #d8b4fe;
+  --color-purple-400: #8b5cf6;
+  --color-purple-500: #7c3aed;
+  --color-purple-600: #6d28d9;
+
+  --color-pink-100: #fce7f3;
+  --color-pink-200: #fbcfe8;
+  --color-pink-300: #f9a8d4;
+  --color-pink-400: #ec4899;
+  --color-pink-500: #db2777;
+  --color-pink-600: #be185d;
+
+  /* Background Colors */
+  --bg-dark-primary: #0f0f23;
+  --bg-dark-secondary: #1a1a3e;
+  --bg-dark-tertiary: #2d1b69;
+  --bg-dark-quaternary: #4c1d95;
+  --bg-dark-quinary: #7c2d92;
+
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #a5f3fc;
+  --text-tertiary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  /* === GRADIENTS === */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-hero: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 25%, #2d1b69 50%, #4c1d95 75%, #7c2d92 100%);
+
+  /* === SPACING === */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  /* === TYPOGRAPHY === */
+  --font-primary: 'Inter', sans-serif;
+  --font-heading: 'Orbitron', sans-serif;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 3.75rem;
+
+  /* === EFFECTS === */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: 20px;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  --glow-small: 0 0 20px currentColor;
+  --glow-medium: 0 0 20px currentColor, 0 0 40px currentColor;
+  --glow-large: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
+
+  /* === TRANSITIONS === */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 600ms cubic-bezier(0.23, 1, 0.320, 1);
+
+  /* === BORDER RADIUS === */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* === Z-INDEX === */
+  --z-base: 0;
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+}

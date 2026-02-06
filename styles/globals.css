@@ -1,0 +1,50 @@
+/**
+ * Global Styles - Estilos globales optimizados
+ * 
+ * Importa el sistema de diseño completo con design tokens
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* Design System */
+@import './theme/tokens.css';
+@import './theme/animations.css';
+@import './utils/helpers.css';
+
+/* === BASE RESETS === */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+body {
+  background: var(--gradient-hero);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+  color: var(--text-primary);
+}
+
+/* === SMOOTH SCROLLING === */
+html {
+  scroll-behavior: smooth;
+}
+
+/* === SELECTION STYLING === */
+::selection {
+  background-color: var(--color-cyan-400);
+  color: var(--bg-dark-primary);
+}
+
+::-moz-selection {
+  background-color: var(--color-cyan-400);
+  color: var(--bg-dark-primary);
+}

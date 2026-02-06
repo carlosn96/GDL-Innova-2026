@@ -1,26 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Design System */
+@import '../styles/theme/tokens.css';
+@import '../styles/theme/animations.css';
+@import '../styles/utils/helpers.css';
+
+/* === BASE RESETS === */
+* {
+    box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    background: var(--gradient-hero);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-primary);
+    color: var(--text-primary);
+}
+
+/* === SMOOTH SCROLLING === */
+html {
+    scroll-behavior: smooth;
+}
+
+/* === SELECTION STYLING === */
+::selection {
+    background-color: var(--color-cyan-400);
+    color: var(--bg-dark-primary);
+}
+
+::-moz-selection {
+    background-color: var(--color-cyan-400);
+    color: var(--bg-dark-primary);
+}
+
+.neural-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.neon-text {
+    text-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
+}
+
+.floating-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: float 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+    }
+    50% {
+        transform: translateY(-20px) scale(1.1);
+    }
+}
+
+.pulse-ring {
+    animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+    max-width: 100%;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.data-stream {
+    position: absolute;
+    width: 2px;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, #00f2fe, transparent);
+    animation: data-flow 3s linear infinite;
+}
+
+@keyframes data-flow {
+    0% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+.hologram-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.hologram-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.3), transparent);
+    animation: hologram-scan 3s ease-in-out infinite;
+}
+
+@keyframes hologram-scan {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.morphing-shape {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    animation: morph 8s ease-in-out infinite;
+}
+
+@keyframes morph {
+    0%, 100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    50% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+}
+
+.typing-animation {
+    overflow: hidden;
+    border-right: 3px solid #00f2fe;
+    white-space: nowrap;
+    animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: #00f2fe;
+    }
+}
+
+.neural-network {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.neuron {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #00f2fe;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00f2fe;
+    animation: neuron-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes neuron-pulse {
+    0% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+.challenge-card {
+    transform-style: preserve-3d;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.challenge-card:hover {
+    transform: rotateY(10deg) rotateX(5deg) translateZ(50px);
+}
+
+.timeline-3d {
+    perspective: 1000px;
+}
+
+.timeline-item-3d {
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;
+}
+
+.timeline-item-3d:hover {
+    transform: translateZ(30px) rotateY(-5deg);
+}
+
+.particle-field {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #00f2fe;
+    border-radius: 50%;
+    animation: particle-float 20s linear infinite;
+}
+
+@keyframes particle-float {
+    0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) translateX(100px);
+        opacity: 0;
+    }
+}
+
+.magnetic-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.magnetic-hover:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 242, 254, 0.3);
+}
+
+.text-glow {
+    text-shadow: 0 0 20px currentColor;
+}
+
+.hero-bg {
+    background: radial-gradient(ellipse at center, rgba(103, 126, 234, 0.15) 0%, transparent 70%), linear-gradient(135deg, #0f0f23 0%, #1a1a3e 25%, #2d1b69 50%, #4c1d95 75%, #7c2d92 100%);
+}
+
+.scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 9999;
+}
+
+.scroll-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #00f2fe, #667eea, #ec4899);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.1s ease;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
 }

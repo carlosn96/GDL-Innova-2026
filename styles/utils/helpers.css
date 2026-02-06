@@ -1,0 +1,149 @@
+/**
+ * Utility Classes - Clases CSS utilitarias personalizadas
+ */
+
+/* === GLASS MORPHISM === */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-2xl);
+}
+
+/* === TEXT EFFECTS === */
+.neon-text {
+  text-shadow: var(--glow-large);
+}
+
+.text-glow {
+  text-shadow: var(--glow-small);
+}
+
+/* === BACKGROUND EFFECTS === */
+.hero-bg {
+  background: 
+    radial-gradient(ellipse at center, rgba(103, 126, 234, 0.15) 0%, transparent 70%),
+    var(--gradient-hero);
+}
+
+/* === FLOATING ELEMENTS === */
+.floating-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: float 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* === HOVER EFFECTS === */
+.magnetic-hover {
+  transition: all var(--transition-normal);
+}
+
+.magnetic-hover:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 242, 254, 0.3);
+}
+
+/* === 3D EFFECTS === */
+.challenge-card {
+  transform-style: preserve-3d;
+  transition: all var(--transition-bounce);
+}
+
+.challenge-card:hover {
+  transform: rotateY(10deg) rotateX(5deg) translateZ(50px);
+}
+
+.timeline-3d {
+  perspective: 1000px;
+}
+
+.timeline-item-3d {
+  transform-style: preserve-3d;
+  transition: all var(--transition-slow);
+}
+
+.timeline-item-3d:hover {
+  transform: translateZ(30px) rotateY(-5deg);
+}
+
+/* === SCROLL INDICATOR === */
+.scroll-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--glass-border);
+  z-index: var(--z-fixed);
+}
+
+.scroll-progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-cyan-400), var(--color-purple-400), var(--color-pink-400));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.1s ease;
+}
+
+/* === PARTICLES & NEURONS === */
+.particle-field {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--color-cyan-400);
+  border-radius: 50%;
+  animation: particle-float 20s linear infinite;
+}
+
+.neural-network {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.neuron {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--color-cyan-400);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--color-cyan-400);
+  animation: neuron-pulse 2s ease-in-out infinite alternate;
+}
+
+/* === MORPHING SHAPE === */
+.morphing-shape {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: morph 8s ease-in-out infinite;
+}
+
+/* === HOLOGRAM EFFECT === */
+.hologram-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.hologram-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.3), transparent);
+  animation: hologram-scan 3s ease-in-out infinite;
+}
