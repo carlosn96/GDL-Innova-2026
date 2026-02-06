@@ -17,10 +17,7 @@ export const metadata: Metadata = {
   title: siteConfig.metadata.title,
   description: siteConfig.metadata.description,
   keywords: [...siteConfig.metadata.keywords],
-  icons: {
-    icon: { url: '/favicon.ico', type: 'image/x-icon' },
-    shortcut: { url: '/favicon.ico', type: 'image/x-icon' },
-  },
+  icons: ['/favicon.ico'],
 };
 
 export default function RootLayout({
