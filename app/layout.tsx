@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   keywords: [...siteConfig.metadata.keywords],
   icons: {
     icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
   },
 };
 
