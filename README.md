@@ -1,6 +1,6 @@
 # GDL Innova Hackathon 2026 - A
 
-Un espacio de colaboración simbiótica entre la Ingeniería en Computación y el Diseño Gráfico y Multimedia de la Universidad UNE.
+Un espacio de colaboración entre el Diseño Gráfico y la Ingeniería en Computación de la Universidad UNE.
 
 ## 🚀 Stack Tecnológico
 
@@ -29,7 +29,9 @@ gdlinova/
 │   ├── CTA.tsx           # Call to Action
 │   ├── Evaluation.tsx    # Criterios de Evaluación
 │   ├── Footer.tsx        # Footer
-│   ├── Hero.tsx          # Hero Section
+│   ├── features/
+│   │   └── hero/
+│   │       └── HeroSection.tsx # Hero Section (refactorizado)
 │   ├── Navigation.tsx    # Navegación
 │   ├── Schedule.tsx      # Cronograma
 │   ├── Tech.tsx          # Stack Tecnológico
