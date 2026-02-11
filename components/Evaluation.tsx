@@ -29,7 +29,7 @@ export default function Evaluation() {
               <GradientBox
                 gradientFrom={criterion.gradient.from}
                 gradientTo={criterion.gradient.to}
-                icon={criterion.icon.replace('fas fa-', '')}
+                icon={criterion.icon}
                 className="w-24 h-24 rounded-full mx-auto mb-6"
               />
               <h3 className={`text-2xl font-bold mb-4 ${
@@ -58,7 +58,7 @@ export default function Evaluation() {
         <div className="mt-12">
           <Card variant="glass" className="p-8 rounded-2xl">
             <h3 className="text-2xl font-bold text-white text-center mb-6">
-              <Icon name="trophy" className="text-yellow-400 mr-3" />
+              <Icon name="fas fa-trophy" className="text-yellow-400 mr-3" />
               Jurado Docente
             </h3>
             <p className="text-gray-300 text-center leading-relaxed">

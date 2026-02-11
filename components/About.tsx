@@ -44,7 +44,7 @@ export default function About() {
             </span>
           </h2>
           <p className="text-cyan-200 text-xl max-w-3xl mx-auto">
-            Un evento que transforma la IA de herramienta a puente entre la lógica sistémica y la creatividad visual
+            Un evento que transforma la IA, de herramienta a puente entre la lógica sistémica y la creatividad visual
           </p>
         </div>
 
@@ -53,12 +53,12 @@ export default function About() {
             <GradientBox
               gradientFrom="cyan-500"
               gradientTo="blue-600"
-              icon="lightbulb"
+              icon="fas fa-lightbulb"
               className="w-16 h-16 rounded-xl mb-6"
             />
-            <h3 className="text-2xl font-bold text-cyan-300 mb-4">La Visión</h3>
+            <h3 className="text-2xl font-bold text-cyan-300 mb-4">VISIÓN</h3>
             <p className="text-gray-300 leading-relaxed">
-              Este evento busca unir a estudiantes de {siteConfig.organization.departments.engineering} y {siteConfig.organization.departments.design} bajo un objetivo común: explorar cómo la IA actúa como puente entre la lógica sistémica y la creatividad visual para resolver retos reales en Guadalajara.
+              Convertir al Hackathon en el referente universitario de colaboración interdisciplinaria, donde la tecnología y el diseño gráfico se fusionen para crear soluciones disruptivas. Cada edición será un motor de soluciones reales, demostrando que la tecnología sin estética es fría, y que el diseño sin funcionalidad es vacío.
             </p>
           </Card>
 
@@ -66,42 +66,15 @@ export default function About() {
             <GradientBox
               gradientFrom="purple-500"
               gradientTo="pink-600"
-              icon="rocket"
+              icon="fas fa-rocket"
               className="w-16 h-16 rounded-xl mb-6"
             />
-            <h3 className="text-2xl font-bold text-purple-300 mb-4">El Objetivo</h3>
+            <h3 className="text-2xl font-bold text-purple-300 mb-4">OBJETIVO</h3>
             <p className="text-gray-300 leading-relaxed">
-              Crear soluciones reales donde el diseño no sea solo estético y el código no sea solo funcional, sino que ambos convergan en prototipos que impacten la sociedad y la industria local de Guadalajara.
+              Fomentar la sinergia profesional entre alumnos de Ingeniería en Computación y Diseño Gráfico mediante el desarrollo de una solución digital integral (Web/App). Se busca que los estudiantes apliquen sus conocimientos técnicos en un entorno de alta presión, fortaleciendo sus habilidades de comunicación, trabajo en equipo y resolución de problemas sociales.
             </p>
           </Card>
         </div>
-
-        {/* Mentores Section */}
-        <Card variant="glass" className="p-8 rounded-2xl">
-          <h3 className="text-3xl font-bold text-white mb-8 text-center">
-            <Icon name="chalkboard-teacher" className="text-cyan-400 mr-3" />
-            El Docente como Facilitador de la Sinergia
-          </h3>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {mentorRoles.map((role) => (
-              <div key={role.id} className="text-center">
-                <GradientBox
-                  gradientFrom={role.gradientFrom}
-                  gradientTo={role.gradientTo}
-                  icon={role.icon}
-                  className="w-20 h-20 rounded-full mx-auto mb-4"
-                />
-                <h4 className={`${role.color} font-bold text-lg mb-2`}>
-                  {role.title}
-                </h4>
-                <p className="text-gray-300 text-sm">
-                  {role.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Card>
       </div>
     </section>
   );

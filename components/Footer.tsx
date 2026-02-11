@@ -12,7 +12,7 @@ export default function Footer() {
               <GradientBox
                 gradientFrom="cyan-500"
                 gradientTo="purple-600"
-                icon="brain"
+                icon="fas fa-brain"
                 className="w-10 h-10 rounded-lg"
               />
             </div>
@@ -37,7 +37,7 @@ export default function Footer() {
                 className="w-10 h-10 bg-cyan-500/20 rounded-full flex items-center justify-center hover:bg-cyan-500/30 transition"
                 aria-label="Facebook"
               >
-                <Icon name="facebook" className="text-cyan-300" />
+                <Icon name="fab fa-facebook" className="text-cyan-300" />
               </a>
               <a 
                 href={siteConfig.social.instagram}
@@ -46,7 +46,7 @@ export default function Footer() {
                 className="w-10 h-10 bg-purple-500/20 rounded-full flex items-center justify-center hover:bg-purple-500/30 transition"
                 aria-label="Instagram"
               >
-                <Icon name="instagram" className="text-purple-300" />
+                <Icon name="fab fa-instagram" className="text-purple-300" />
               </a>
               <a 
                 href={siteConfig.social.twitter}
@@ -55,7 +55,7 @@ export default function Footer() {
                 className="w-10 h-10 bg-pink-500/20 rounded-full flex items-center justify-center hover:bg-pink-500/30 transition"
                 aria-label="Twitter"
               >
-                <Icon name="twitter" className="text-pink-300" />
+                <Icon name="fab fa-twitter" className="text-pink-300" />
               </a>
             </div>
           </div>
@@ -63,7 +63,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-700 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} {siteConfig.organization.name} - Todos los derechos reservados
+            © {new Date().getFullYear()} {siteConfig.organization.name} Todos los derechos reservados
           </p>
           <p className="text-gray-500 text-xs mt-2">
             {siteConfig.organization.location}
