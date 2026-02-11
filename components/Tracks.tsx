@@ -31,15 +31,15 @@ export default function Tracks() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
               <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-                Retos Estratégicos
+                Reto 2026
               </span>
             </h2>
             <p className="text-cyan-200 text-xl">
-              Los equipos deberán elegir uno de los ejes temáticos basados en las necesidades reales del municipio para este año
+              &quot;Escuelas seguras&quot;
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="max-w-3xl mx-auto">
             {tracksData.map((challenge) => (
               <Card
                 key={challenge.id}
@@ -50,14 +50,10 @@ export default function Tracks() {
                 <GradientBox
                   gradientFrom={challenge.gradient.from}
                   gradientTo={challenge.gradient.to}
-                  icon={challenge.icon.replace('fas fa-', '')}
+                  icon={challenge.icon}
                   className="w-20 h-20 rounded-xl mx-auto mb-6 morphing-shape"
                 />
-                <h3 className={`text-2xl font-bold text-center mb-4 ${
-                  challenge.id === 'escuelas-corresponsabilidad' ? 'text-cyan-300' : 
-                  challenge.id === 'corazon-contento' ? 'text-purple-300' :
-                  challenge.id === 'guardianes-ciudad' ? 'text-pink-300' : 'text-cyan-300'
-                }`}>
+                <h3 className="text-2xl font-bold text-center mb-4 text-cyan-300">
                   {challenge.title}
                 </h3>
                 <p className="text-gray-300 text-center leading-relaxed">
@@ -70,22 +66,13 @@ export default function Tracks() {
                       color={tag.color as 'cyan' | 'purple' | 'pink'}
                       className="mx-1"
                     >
-                      <Icon name="tag" className="mr-2" />
+                      <Icon name="fas fa-tag" className="mr-2" />
                       {tag.label}
                     </Badge>
                   ))}
                 </div>
               </Card>
             ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <Card variant="glass" className="inline-block px-8 py-4 rounded-full">
-              <p className="text-cyan-200">
-                <Icon name="lightbulb" className="text-yellow-400 mr-2" />
-                Los equipos tienen <span className="text-white font-bold">libertad creativa</span> dentro de estos ejes
-              </p>
-            </Card>
           </div>
         </div>
       </section>
@@ -112,20 +99,38 @@ export default function Tracks() {
               </button>
             </div>
             <p className="text-gray-300 mb-4 font-semibold text-purple-300">{currentChallenge.subtitle}</p>
+            
             <h4 className="text-xl font-bold text-cyan-400 mb-2">Problema:</h4>
-            <p className="text-gray-300 mb-4">{currentChallenge.problem}</p>
-            <h4 className="text-xl font-bold text-purple-400 mb-2">Sinergia Interdisciplinaria:</h4>
-            <ul className="text-gray-300 mb-4 list-disc list-inside">
-              {currentChallenge.synergy.map((item, index) => (
-                <li key={index}>
-                  <strong className={item.role === 'IC' ? 'text-cyan-300' : 'text-pink-300'}>
-                    {item.role}:
-                  </strong> {item.description}
-                </li>
-              ))}
-            </ul>
-            <h4 className="text-xl font-bold text-pink-400 mb-2">Valor IA:</h4>
-            <p className="text-gray-300">{currentChallenge.aiValue}</p>
+            <p className="text-gray-300 mb-6 whitespace-pre-line leading-relaxed">{currentChallenge.problem}</p>
+            
+            {currentChallenge.objective && (
+              <>
+                <h4 className="text-xl font-bold text-green-400 mb-2">Objetivo:</h4>
+                <p className="text-gray-300 mb-6 leading-relaxed">{currentChallenge.objective}</p>
+              </>
+            )}
+
+            {currentChallenge.synergy && currentChallenge.synergy.length > 0 && (
+              <>
+                <h4 className="text-xl font-bold text-purple-400 mb-2">Sinergia Interdisciplinaria:</h4>
+                <ul className="text-gray-300 mb-6 list-disc list-inside">
+                  {currentChallenge.synergy.map((item, index) => (
+                    <li key={index}>
+                      <strong className={item.role === 'IC' ? 'text-cyan-300' : 'text-pink-300'}>
+                        {item.role}:
+                      </strong> {item.description}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            {currentChallenge.aiValue && (
+              <>
+                <h4 className="text-xl font-bold text-pink-400 mb-2">Valor IA:</h4>
+                <p className="text-gray-300">{currentChallenge.aiValue}</p>
+              </>
+            )}
           </Card>
         </div>
       )}

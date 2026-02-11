@@ -25,8 +25,9 @@ export interface Challenge {
   };
   description: string;
   problem: string;
-  synergy: ChallengeSynergy[];
-  aiValue: string;
+  objective?: string;
+  synergy?: ChallengeSynergy[];
+  aiValue?: string;
   tags: ChallengeTag[];
   animationDelay?: string;
 }
