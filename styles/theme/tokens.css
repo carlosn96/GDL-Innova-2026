@@ -59,8 +59,8 @@
   --spacing-3xl: 4rem;
 
   /* === TYPOGRAPHY === */
-  --font-primary: 'Inter', sans-serif;
-  --font-heading: 'Orbitron', sans-serif;
+  --font-primary: var(--font-inter), sans-serif;
+  --font-heading: var(--font-orbitron), sans-serif;
 
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
