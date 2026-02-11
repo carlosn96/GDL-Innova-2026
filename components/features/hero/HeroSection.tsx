@@ -64,12 +64,7 @@ export default function HeroSection() {
 
       {/* Main Content */}
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-        {/* Event Badge */}
-        <div className="mb-8">
-          <Badge color="cyan" size="md" icon="fas fa-calendar-alt">
-            Hackathon {siteConfig.event.year} - {siteConfig.event.period}
-          </Badge>
-        </div>
+        
 
         {/* Title */}
         <h1 className="text-4xl md:text-6xl font-black text-white mb-6 neon-text">
