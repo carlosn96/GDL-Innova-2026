@@ -25,7 +25,7 @@ export const navigationLinks: LinkConfig[] = [
   },
   {
     href: '#tracks',
-    label: 'Ejes',
+    label: 'Reto 2026',
     icon: 'fas fa-route'
   },
   {
