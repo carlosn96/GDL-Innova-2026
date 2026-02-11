@@ -25,7 +25,7 @@ export default function Tech() {
                 <GradientBox
                   gradientFrom={category.gradient.from}
                   gradientTo={category.gradient.to}
-                  icon={category.icon.replace('fas fa-', '')}
+                  icon={category.icon}
                   className="w-16 h-16 rounded-xl mr-4"
                 />
                 <h3 className={`text-2xl font-bold ${
@@ -39,7 +39,7 @@ export default function Tech() {
                 {category.items.map((tool, index) => (
                   <li key={index} className="flex items-start">
                     <Icon 
-                      name="chevron-right" 
+                      name="fas fa-chevron-right" 
                       className={`mr-3 mt-1 ${
                         category.id === 'engineering' ? 'text-cyan-400' :
                         category.id === 'design' ? 'text-purple-400' : 'text-pink-400'

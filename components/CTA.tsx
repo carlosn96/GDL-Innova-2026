@@ -22,7 +22,7 @@ export default function CTA() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full text-white font-bold text-lg hover:shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-105"
             >
-              <Icon name="calendar-plus" className="mr-2" />
+              <Icon name="fas fa-calendar-plus" className="mr-2" />
               Agendar Evento!
             </a>
           </div>

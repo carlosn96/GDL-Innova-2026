@@ -17,7 +17,11 @@ export const metadata: Metadata = {
   title: siteConfig.metadata.title,
   description: siteConfig.metadata.description,
   keywords: [...siteConfig.metadata.keywords],
-  icons: ['/favicon.ico'],
+  icons: {
+    icon: '/favicon-custom.svg',
+    shortcut: '/favicon-custom.svg',
+    apple: '/favicon-custom.svg',
+  },
 };
 
 export default function RootLayout({

@@ -1,8 +1,8 @@
 'use client';
 
-import { useScrollProgress, useMagneticHover, useCursorTrail, useScrollAnimation } from '@/lib/hooks';
+import { useScrollProgress, useMagneticHover, useCursorTrail } from '@/lib/hooks';
 import Navigation from '../components/Navigation';
-import Hero from '../components/Hero';
+import HeroSection from '../components/features/hero/HeroSection';
 import About from '../components/About';
 import Schedule from '../components/Schedule';
 import Tracks from '../components/Tracks';
@@ -15,12 +15,11 @@ export default function Home() {
   useScrollProgress();
   useMagneticHover();
   useCursorTrail();
-  useScrollAnimation();
 
   return (
     <main>
       <Navigation />
-      <Hero />
+      <HeroSection />
       <About />
       <Schedule />
       <Tracks />

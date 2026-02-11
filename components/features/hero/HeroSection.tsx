@@ -47,15 +47,15 @@ export default function HeroSection() {
   ];
 
   return (
-    <section 
-      id="hero" 
+    <section
+      id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden hero-bg py-20"
     >
       {/* Background Effects */}
       <div className="floating-orb w-96 h-96 bg-purple-500 opacity-20 top-20 left-10" />
-      <div 
-        className="floating-orb w-64 h-64 bg-cyan-500 opacity-20 bottom-20 right-10" 
-        style={{ animationDelay: '2s' }} 
+      <div
+        className="floating-orb w-64 h-64 bg-cyan-500 opacity-20 bottom-20 right-10"
+        style={{ animationDelay: '2s' }}
       />
 
       {/* Containers for dynamic elements */}
@@ -67,7 +67,7 @@ export default function HeroSection() {
         {/* Event Badge */}
         <div className="mb-8">
           <Badge color="cyan" size="md" icon="fas fa-calendar-alt">
-            Hackathon {siteConfig.event.year} - {siteConfig.event.period} • {siteConfig.organization.name}
+            Hackathon {siteConfig.event.year} - {siteConfig.event.period}
           </Badge>
         </div>
 
@@ -85,44 +85,45 @@ export default function HeroSection() {
 
         {/* Description */}
         <p className="text-xl md:text-2xl text-cyan-100 mb-8 max-w-3xl mx-auto">
-          Un espacio de colaboración simbiótica entre la{' '}
-          <span className="text-purple-400 font-semibold">
-            {siteConfig.organization.departments.engineering}
-          </span>{' '}
-          y el{' '}
+          Un espacio de colaboración entre el{' '}
           <span className="text-pink-400 font-semibold">
             {siteConfig.organization.departments.design}
           </span>{' '}
-          de la {siteConfig.organization.name}
+          y la{' '}
+          <span className="text-purple-400 font-semibold">
+            {siteConfig.organization.departments.engineering}
+          </span>
         </p>
 
         {/* Departments Collaboration */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <Card variant="glass" padding="sm" className="px-6 py-3">
-            <Icon name="fas fa-code" className="text-cyan-400 mr-2" />
-            <span className="text-white font-semibold">
-              {siteConfig.organization.departments.engineering}
-            </span>
-          </Card>
-          
-          <div className="text-cyan-400 text-2xl">+</div>
-          
+
           <Card variant="glass" padding="sm" className="px-6 py-3">
             <Icon name="fas fa-palette" className="text-pink-400 mr-2" />
             <span className="text-white font-semibold">
               {siteConfig.organization.departments.design}
             </span>
           </Card>
+
+          <div className="text-cyan-400 text-2xl">+</div>
+
+          <Card variant="glass" padding="sm" className="px-6 py-3">
+            <Icon name="fas fa-code" className="text-cyan-400 mr-2" />
+            <span className="text-white font-semibold">
+              {siteConfig.organization.departments.engineering}
+            </span>
+          </Card>
+
         </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {heroStats.map(stat => (
-            <Card 
+            <Card
               key={stat.id}
-              variant="glass" 
-              padding="md" 
-              hover 
+              variant="glass"
+              padding="md"
+              hover
               className="magnetic-hover"
             >
               <GradientBox
@@ -141,8 +142,8 @@ export default function HeroSection() {
 
         {/* CTA Button */}
         <div className="mt-12">
-          <a 
-            href="#about" 
+          <a
+            href="#about"
             className="inline-block px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full text-white font-bold text-lg hover:shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-105"
           >
             Conoce Más
