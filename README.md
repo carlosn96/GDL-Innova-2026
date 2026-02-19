@@ -109,7 +109,30 @@ npm run lint
 
 ### Variables de Entorno
 
-No se requieren variables de entorno para el proyecto base.
+Para persistir la paleta del `ThemeConfigurator` en Firestore, crea un archivo `.env.local`
+basado en `.env.example`:
+
+```bash
+cp .env.example .env.local
+```
+
+Variables necesarias:
+
+```bash
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
+```
+
+### Firestore (tema)
+
+- Crea un proyecto en Firebase Console.
+- Habilita Firestore Database en modo nativo.
+- Crea una app Web y copia sus credenciales a `.env.local`.
+- El configurador guarda en la colección `themes`, documento `gdlinova`.
 
 ## 🎨 Design System
 
