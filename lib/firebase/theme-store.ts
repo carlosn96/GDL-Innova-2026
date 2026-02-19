@@ -34,6 +34,7 @@ export interface ThemeSnapshot {
   sectionFilters?: Record<string, string>;
   typography?: TypographySelection;
   eventName?: string;
+  devElements?: Record<string, unknown>;
   updatedAt?: unknown;
 }
 
@@ -61,12 +62,13 @@ export async function loadThemeFromFirestore(themeId = DEFAULT_THEME_DOC_ID): Pr
     sectionFilters: data.sectionFilters,
     typography: data.typography,
     eventName: data.eventName,
+    devElements: data.devElements,
     updatedAt: data.updatedAt,
   };
 }
 
 export async function saveThemeToFirestore(
-  payload: Pick<ThemeSnapshot, 'families' | 'gradients'> & Partial<Pick<ThemeSnapshot, 'sectionBaseColor' | 'sectionFilters' | 'typography' | 'eventName'>>,
+  payload: Pick<ThemeSnapshot, 'families' | 'gradients'> & Partial<Pick<ThemeSnapshot, 'sectionBaseColor' | 'sectionFilters' | 'typography' | 'eventName' | 'devElements'>>,
   themeId = DEFAULT_THEME_DOC_ID,
 ): Promise<void> {
   if (!isFirebaseConfigured()) {
