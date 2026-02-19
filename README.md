@@ -119,6 +119,7 @@ cp .env.example .env.local
 Variables necesarias:
 
 ```bash
+ENV=development
 NEXT_PUBLIC_FIREBASE_API_KEY=
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=
@@ -126,6 +127,9 @@ NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
 ```
+
+- Con `ENV=development` se habilita el modo de personalización visual (`ThemeConfigurator`).
+- En cualquier otro valor de `ENV`, el configurador se oculta.
 
 ### Firestore (tema)
 

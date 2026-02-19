@@ -10,7 +10,6 @@ import Tech from '../components/Tech';
 import Evaluation from '../components/Evaluation';
 import CTA from '../components/CTA';
 import Footer from '../components/Footer';
-import { ThemeConfigurator } from '../components/ThemeConfigurator';
 
 export default function Home() {
   useScrollProgress();
@@ -28,7 +27,6 @@ export default function Home() {
       <Evaluation />
       <CTA />
       <Footer />
-      <ThemeConfigurator />
     </main>
   );
 }
