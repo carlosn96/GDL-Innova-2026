@@ -1,26 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Orbitron } from "next/font/google";
 import { siteConfig } from "@/config";
+import { Providers } from "@/components/providers";
+import { inter } from "./fonts/fonts";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const orbitron = Orbitron({
-  subsets: ["latin"],
-  variable: "--font-orbitron",
-});
 
 export const metadata: Metadata = {
   title: siteConfig.metadata.title,
   description: siteConfig.metadata.description,
   keywords: [...siteConfig.metadata.keywords],
   icons: {
-    icon: '/favicon-custom.svg',
-    shortcut: '/favicon-custom.svg',
-    apple: '/favicon-custom.svg',
+    icon: '/logo.svg',
+    shortcut: '/logo.svg',
+    apple: '/logo.svg',
   },
 };
 
@@ -34,8 +25,10 @@ export default function RootLayout({
       <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
       </head>
-      <body className={`${inter.variable} ${orbitron.variable} antialiased`}>
-        {children}
+      <body className={`${inter.variable} antialiased`}>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );
