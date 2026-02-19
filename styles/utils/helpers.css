@@ -22,7 +22,7 @@
 /* === BACKGROUND EFFECTS === */
 .hero-bg {
   background: 
-    radial-gradient(ellipse at center, rgba(103, 126, 234, 0.15) 0%, transparent 70%),
+    radial-gradient(ellipse at center, color-mix(in srgb, var(--color-purple-400) 18%, transparent) 0%, transparent 70%),
     var(--gradient-hero);
 }
 
@@ -42,7 +42,7 @@
 
 .magnetic-hover:hover {
   transform: scale(1.05) translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 242, 254, 0.3);
+  box-shadow: 0 20px 40px color-mix(in srgb, var(--color-cyan-400) 30%, transparent);
 }
 
 /* === 3D EFFECTS === */
@@ -100,11 +100,24 @@
 
 .particle {
   position: absolute;
-  width: 2px;
-  height: 2px;
-  background: var(--color-cyan-400);
-  border-radius: 50%;
+  /* size and color are set inline for variety */
   animation: particle-float 20s linear infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+
+.particle.shape-circle {
+  border-radius: 50%;
+}
+
+.particle.shape-square {
+  border-radius: 8%;
+}
+
+.particle.shape-diamond {
+  border-radius: 10%;
+  transform-origin: center;
 }
 
 .neural-network {
@@ -144,6 +157,6 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-cyan-400) 30%, transparent), transparent);
   animation: hologram-scan 3s ease-in-out infinite;
 }
