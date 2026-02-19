@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_Íconos" data-name="Íconos" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1080 1080">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Degradado_sin_nombre_11);
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+    <linearGradient id="Degradado_sin_nombre_11" data-name="Degradado sin nombre 11" x1="540" y1="1080" x2="540" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#035164"/>
+      <stop offset="1" stop-color="#009e9a"/>
+    </linearGradient>
+  </defs>
+  <rect class="cls-1" width="1080" height="1080" rx="350.64" ry="350.64"/>
+  <g id="H_bco" data-name="H bco">
+    <rect class="cls-2" x="295.92" y="133.2" width="162.72" height="813.6"/>
+    <rect class="cls-2" x="621.36" y="621.36" width="162.72" height="325.44"/>
+    <path class="cls-2" d="M621.36,133.2h0c89.81,0,162.72,72.91,162.72,162.72v162.72h-162.72V133.2h0Z" transform="translate(1405.44 591.84) rotate(-180)"/>
+    <path class="cls-2" d="M702.72,377.28h0v325.44h-162.72v-162.72c0-89.81,72.91-162.72,162.72-162.72Z" transform="translate(1161.36 -81.36) rotate(90)"/>
+  </g>
+</svg>
