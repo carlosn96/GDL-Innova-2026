@@ -20,7 +20,7 @@ export const scheduleData: ScheduleDay[] = [
         icon: 'fas fa-flag-checkered',
         gradient: {
           from: 'cyan-500',
-          to: 'blue-600'
+          to: 'cyan-600'
         },
         title: 'Kick-off: Retos GDL 2026',
         timeRange: {
@@ -62,7 +62,7 @@ export const scheduleData: ScheduleDay[] = [
         icon: 'fas fa-lightbulb',
         gradient: {
           from: 'pink-500',
-          to: 'red-600'
+          to: 'pink-600'
         },
         title: 'Sprint de Ideación',
         timeRange: {
@@ -76,7 +76,7 @@ export const scheduleData: ScheduleDay[] = [
         icon: 'fas fa-check-double',
         gradient: {
           from: 'cyan-500',
-          to: 'blue-600'
+          to: 'cyan-600'
         },
         title: 'Validación Docente',
         timeRange: {
@@ -127,7 +127,7 @@ export const scheduleData: ScheduleDay[] = [
         icon: 'fas fa-cogs',
         gradient: {
           from: 'pink-500',
-          to: 'red-600'
+          to: 'pink-600'
         },
         title: 'Pulido y Testeo IA',
         timeRange: {
@@ -141,7 +141,7 @@ export const scheduleData: ScheduleDay[] = [
         icon: 'fas fa-trophy',
         gradient: {
           from: 'cyan-500',
-          to: 'blue-600'
+          to: 'cyan-600'
         },
         title: 'Demo Day: Pitch GDL',
         timeRange: {

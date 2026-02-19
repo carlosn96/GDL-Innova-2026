@@ -26,7 +26,7 @@ export const techStackData: TechCategory[] = [
     icon: 'fas fa-microchip',
     gradient: {
       from: 'cyan-500',
-      to: 'blue-600'
+      to: 'cyan-600'
     },
     items: [
       {
@@ -72,7 +72,7 @@ export const techStackData: TechCategory[] = [
     icon: 'fas fa-palette',
     gradient: {
       from: 'pink-500',
-      to: 'red-600'
+      to: 'pink-600'
     },
     items: [
       {

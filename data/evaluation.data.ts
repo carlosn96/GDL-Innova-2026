@@ -24,7 +24,7 @@ export const evaluationData: EvaluationCriterion[] = [
     icon: 'fas fa-lightbulb',
     gradient: {
       from: 'cyan-500',
-      to: 'blue-600'
+      to: 'cyan-600'
     },
     weight: EVALUATION_CRITERIA.VALUE_PROPOSITION
   },
@@ -46,7 +46,7 @@ export const evaluationData: EvaluationCriterion[] = [
     icon: 'fas fa-robot',
     gradient: {
       from: 'pink-500',
-      to: 'red-600'
+      to: 'pink-600'
     },
     weight: EVALUATION_CRITERIA.AI_EXECUTION
   },
