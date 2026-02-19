@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { tracksData } from '@/data/tracks.data';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -15,26 +15,32 @@ export default function Tracks() {
   const openChallengeModal = (challenge: Challenge) => {
     setCurrentChallenge(challenge);
     setModalOpen(true);
-    document.body.style.overflow = 'hidden';
   };
 
   const closeChallengeModal = () => {
     setModalOpen(false);
     setCurrentChallenge(null);
-    document.body.style.overflow = 'auto';
   };
+
+  useEffect(() => {
+    document.body.style.overflow = modalOpen ? 'hidden' : 'auto';
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [modalOpen]);
 
   return (
     <>
-      <section id="tracks" className="py-20 px-4">
+      <section id="tracks" data-section="tracks" className="site-section py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-black theme-text-primary mb-4">
+              <span className="theme-title-gradient bg-clip-text text-transparent">
                 Reto 2026
               </span>
             </h2>
-            <p className="text-cyan-200 text-xl">
+            <p className="theme-text-secondary text-xl">
               &quot;Escuelas seguras&quot;
             </p>
           </div>
@@ -53,10 +59,10 @@ export default function Tracks() {
                   icon={challenge.icon}
                   className="w-20 h-20 rounded-xl mx-auto mb-6 morphing-shape"
                 />
-                <h3 className="text-2xl font-bold text-center mb-4 text-cyan-300">
+                <h3 className="text-2xl font-bold text-center mb-4 theme-accent-cyan-soft">
                   {challenge.title}
                 </h3>
-                <p className="text-gray-300 text-center leading-relaxed">
+                <p className="theme-text-tertiary text-center leading-relaxed">
                   {challenge.description}
                 </p>
                 <div className="mt-6 text-center">
@@ -80,7 +86,7 @@ export default function Tracks() {
       {/* Modal for Challenges */}
       {modalOpen && currentChallenge && (
         <div 
-          className="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" 
+          className="modal-overlay theme-overlay-backdrop fixed inset-0 flex items-center justify-center z-50" 
           onClick={closeChallengeModal}
         >
           <Card 
@@ -89,34 +95,34 @@ export default function Tracks() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-3xl font-bold text-cyan-300">{currentChallenge.title}</h3>
+              <h3 className="text-3xl font-bold theme-accent-cyan-soft">{currentChallenge.title}</h3>
               <button 
                 onClick={closeChallengeModal} 
-                className="text-gray-400 hover:text-white text-2xl"
+                className="theme-text-muted theme-interactive text-2xl"
                 aria-label="Cerrar modal"
               >
                 &times;
               </button>
             </div>
-            <p className="text-gray-300 mb-4 font-semibold text-purple-300">{currentChallenge.subtitle}</p>
+            <p className="theme-accent-purple-soft mb-4 font-semibold">{currentChallenge.subtitle}</p>
             
-            <h4 className="text-xl font-bold text-cyan-400 mb-2">Problema:</h4>
-            <p className="text-gray-300 mb-6 whitespace-pre-line leading-relaxed">{currentChallenge.problem}</p>
+            <h4 className="text-xl font-bold theme-accent-cyan mb-2">Problema:</h4>
+            <p className="theme-text-tertiary mb-6 whitespace-pre-line leading-relaxed">{currentChallenge.problem}</p>
             
             {currentChallenge.objective && (
               <>
-                <h4 className="text-xl font-bold text-green-400 mb-2">Objetivo:</h4>
-                <p className="text-gray-300 mb-6 leading-relaxed">{currentChallenge.objective}</p>
+                <h4 className="text-xl font-bold theme-accent-cyan mb-2">Objetivo:</h4>
+                <p className="theme-text-tertiary mb-6 leading-relaxed">{currentChallenge.objective}</p>
               </>
             )}
 
             {currentChallenge.synergy && currentChallenge.synergy.length > 0 && (
               <>
-                <h4 className="text-xl font-bold text-purple-400 mb-2">Sinergia Interdisciplinaria:</h4>
-                <ul className="text-gray-300 mb-6 list-disc list-inside">
+                <h4 className="text-xl font-bold theme-accent-purple mb-2">Sinergia Interdisciplinaria:</h4>
+                <ul className="theme-text-tertiary mb-6 list-disc list-inside">
                   {currentChallenge.synergy.map((item, index) => (
                     <li key={index}>
-                      <strong className={item.role === 'IC' ? 'text-cyan-300' : 'text-pink-300'}>
+                      <strong className={item.role === 'IC' ? 'theme-accent-cyan-soft' : 'theme-accent-pink-soft'}>
                         {item.role}:
                       </strong> {item.description}
                     </li>
@@ -127,8 +133,8 @@ export default function Tracks() {
 
             {currentChallenge.aiValue && (
               <>
-                <h4 className="text-xl font-bold text-pink-400 mb-2">Valor IA:</h4>
-                <p className="text-gray-300">{currentChallenge.aiValue}</p>
+                <h4 className="text-xl font-bold theme-accent-pink mb-2">Valor IA:</h4>
+                <p className="theme-text-tertiary">{currentChallenge.aiValue}</p>
               </>
             )}
           </Card>

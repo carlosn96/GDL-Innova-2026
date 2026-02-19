@@ -5,15 +5,15 @@ import { Icon } from '@/components/ui/icon';
 
 export default function Tech() {
   return (
-    <section id="tech" className="py-20 px-4 bg-black bg-opacity-20">
+    <section id="tech" data-section="tech" className="site-section py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-black theme-text-primary mb-4">
+            <span className="theme-title-gradient bg-clip-text text-transparent">
               Stack Tecnológico
             </span>
           </h2>
-          <p className="text-cyan-200 text-xl mb-4">
+          <p className="theme-text-secondary text-xl mb-4">
             Herramientas de capa gratuita 2026
           </p>
         </div>
@@ -29,8 +29,8 @@ export default function Tech() {
                   className="w-16 h-16 rounded-xl mr-4"
                 />
                 <h3 className={`text-2xl font-bold ${
-                  category.id === 'engineering' ? 'text-cyan-300' :
-                  category.id === 'design' ? 'text-purple-300' : 'text-pink-300'
+                  category.id === 'engineering' ? 'theme-accent-cyan-soft' :
+                  category.id === 'design' ? 'theme-accent-purple-soft' : 'theme-accent-pink-soft'
                 }`}>
                   {category.title}
                 </h3>
@@ -41,12 +41,12 @@ export default function Tech() {
                     <Icon 
                       name="fas fa-chevron-right" 
                       className={`mr-3 mt-1 ${
-                        category.id === 'engineering' ? 'text-cyan-400' :
-                        category.id === 'design' ? 'text-purple-400' : 'text-pink-400'
+                        category.id === 'engineering' ? 'theme-accent-cyan' :
+                        category.id === 'design' ? 'theme-accent-purple' : 'theme-accent-pink'
                       }`}
                     />
-                    <span className="text-gray-300">
-                      <strong className="text-white">{tool.name}:</strong> {tool.description}
+                    <span className="theme-text-tertiary">
+                      <strong className="theme-text-primary">{tool.name}:</strong> {tool.description}
                     </span>
                   </li>
                 ))}

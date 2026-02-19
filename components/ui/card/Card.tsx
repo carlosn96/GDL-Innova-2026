@@ -16,9 +16,9 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     const baseStyles = 'rounded-2xl transition-all duration-300';
     
     const variants = {
-      default: 'bg-gray-800/50 border border-gray-700',
+      default: 'theme-card-default border',
       glass: 'glass-card',
-      gradient: 'bg-gradient-to-br from-cyan-900/30 to-purple-900/30 border border-cyan-500/30'
+      gradient: 'theme-card-gradient border'
     };
 
     const paddings = {

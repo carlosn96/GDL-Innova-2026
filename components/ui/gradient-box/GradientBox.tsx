@@ -3,7 +3,7 @@
  */
 
 import { HTMLAttributes, forwardRef, ReactNode } from 'react';
-import { cn, buildGradientClass } from '@/lib/utils';
+import { cn, buildGradientStyle } from '@/lib/utils';
 import { Icon } from '../icon';
 
 export interface GradientBoxProps extends HTMLAttributes<HTMLDivElement> {
@@ -41,21 +41,21 @@ export const GradientBox = forwardRef<HTMLDivElement, GradientBoxProps>(
       rounded: 'rounded-xl'
     };
 
-    const gradientClass = buildGradientClass(gradientFrom, gradientTo);
+    const gradientStyle = buildGradientStyle(gradientFrom, gradientTo);
 
     return (
       <div
         ref={ref}
         className={cn(
-          gradientClass,
           sizes[size],
           shapes[shape],
           'flex items-center justify-center',
           className
         )}
+        style={{ backgroundImage: gradientStyle }}
         {...props}
       >
-        {icon && <Icon name={icon} size={iconSize} className="text-white" />}
+        {icon && <Icon name={icon} size={iconSize} className="theme-text-primary" />}
         {children}
       </div>
     );

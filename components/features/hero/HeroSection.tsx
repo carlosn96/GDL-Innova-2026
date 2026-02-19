@@ -12,11 +12,12 @@
 'use client';
 
 import { useEffect } from 'react';
-import { siteConfig } from '@/config';
-import { Badge, Card, GradientBox, Icon } from '@/components/ui';
+import { useSiteConfig } from '@/lib/site-context';
+import { Card, GradientBox, Icon } from '@/components/ui';
 import { generateParticles, generateNeurons } from '@/lib/utils';
 
 export default function HeroSection() {
+  const { siteConfig } = useSiteConfig();
   useEffect(() => {
     generateParticles('particleField');
     generateNeurons('neuralNetwork');
@@ -26,7 +27,7 @@ export default function HeroSection() {
     {
       id: 'duration',
       icon: 'fas fa-calendar',
-      gradient: { from: 'cyan-500', to: 'blue-600' },
+      gradient: { from: 'cyan-500', to: 'cyan-600' },
       title: 'Duración',
       value: '2 Días Intensivos'
     },
@@ -40,7 +41,7 @@ export default function HeroSection() {
     {
       id: 'focus',
       icon: 'fas fa-map-marker-alt',
-      gradient: { from: 'pink-500', to: 'red-600' },
+      gradient: { from: 'pink-500', to: 'pink-600' },
       title: 'Enfoque',
       value: 'Guadalajara Local'
     }
@@ -49,14 +50,10 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden hero-bg py-20"
+      data-section="hero"
+      className="site-section relative min-h-screen flex items-center justify-center overflow-hidden hero-bg py-20"
     >
-      {/* Background Effects */}
-      <div className="floating-orb w-96 h-96 bg-purple-500 opacity-20 top-20 left-10" />
-      <div
-        className="floating-orb w-64 h-64 bg-cyan-500 opacity-20 bottom-20 right-10"
-        style={{ animationDelay: '2s' }}
-      />
+      
 
       {/* Containers for dynamic elements */}
       <div id="particleField" className="particle-field" />
@@ -66,50 +63,35 @@ export default function HeroSection() {
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
         
 
+        {/* Logo 
+        <img src="/logo.svg" alt="GDL Innova Logo" className="w-20 h-20 mx-auto mb-6" />
+        */}
+        
         {/* Title */}
-        <h1 className="text-4xl md:text-6xl font-black text-white mb-6 neon-text">
-          <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <h1 className="text-8xl md:text-8xl theme-text-primary theme-font-heading tracking- mb-6 neon-text">
+          <span className="bg-clip-text text-transparent theme-font-heading" style={{ backgroundImage: 'var(--gradient-primary)' }}>
             {siteConfig.name}
           </span>
         </h1>
 
         {/* Subtitle */}
-        <h2 className="text-3xl md:text-4xl font-bold text-cyan-200 mb-4">
-          Estrategia de Co-Creación Interdisciplinaria IA
+        <h2 className="text-3xl md:text-4xl theme-text-secondary mb-4">
+          Co-Creación Interdisciplinaria IA
         </h2>
 
         {/* Description */}
-        <p className="text-xl md:text-2xl text-cyan-100 mb-8 max-w-3xl mx-auto">
-          Un espacio de colaboración entre el{' '}
-          <span className="text-pink-400 font-semibold">
+        <p className="text-xl md:text-2xl theme-text-secondary mb-8 max-w-3xl mx-auto">
+          Colaboración entre {' '}
+          <span className="theme-accent-pink font-semibold">
             {siteConfig.organization.departments.design}
           </span>{' '}
-          y la{' '}
-          <span className="text-purple-400 font-semibold">
+          e{' '}
+          <span className="theme-accent-purple font-semibold">
             {siteConfig.organization.departments.engineering}
           </span>
         </p>
 
-        {/* Departments Collaboration */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-
-          <Card variant="glass" padding="sm" className="px-6 py-3">
-            <Icon name="fas fa-palette" className="text-pink-400 mr-2" />
-            <span className="text-white font-semibold">
-              {siteConfig.organization.departments.design}
-            </span>
-          </Card>
-
-          <div className="text-cyan-400 text-2xl">+</div>
-
-          <Card variant="glass" padding="sm" className="px-6 py-3">
-            <Icon name="fas fa-code" className="text-cyan-400 mr-2" />
-            <span className="text-white font-semibold">
-              {siteConfig.organization.departments.engineering}
-            </span>
-          </Card>
-
-        </div>
+        
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
@@ -129,8 +111,8 @@ export default function HeroSection() {
                 shape="rounded"
                 className="mx-auto mb-4"
               />
-              <h3 className="text-cyan-300 font-bold mb-2">{stat.title}</h3>
-              <p className="text-white">{stat.value}</p>
+              <h3 className="theme-accent-cyan-soft font-bold mb-2">{stat.title}</h3>
+              <p className="theme-text-primary">{stat.value}</p>
             </Card>
           ))}
         </div>
@@ -139,7 +121,7 @@ export default function HeroSection() {
         <div className="mt-12">
           <a
             href="#about"
-            className="inline-block px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full text-white font-bold text-lg hover:shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-105"
+            className="inline-block px-8 py-4 rounded-full theme-btn-primary font-bold text-lg transition-all duration-300 transform hover:scale-105"
           >
             Conoce Más
             <Icon name="fas fa-arrow-down" className="ml-2" size="sm" />

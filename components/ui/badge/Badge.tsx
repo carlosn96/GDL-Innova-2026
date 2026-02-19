@@ -17,12 +17,12 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
     const baseStyles = 'inline-flex items-center rounded-full font-medium';
     
     const colors = {
-      cyan: 'bg-cyan-500/20 text-cyan-300',
-      purple: 'bg-purple-500/20 text-purple-300',
-      pink: 'bg-pink-500/20 text-pink-300',
-      blue: 'bg-blue-500/20 text-blue-300',
-      red: 'bg-red-500/20 text-red-300',
-      yellow: 'bg-yellow-500/20 text-yellow-300'
+      cyan: 'theme-badge-cyan',
+      purple: 'theme-badge-purple',
+      pink: 'theme-badge-pink',
+      blue: 'theme-badge-cyan',
+      red: 'theme-badge-pink',
+      yellow: 'theme-badge-purple'
     };
 
     const sizes = {
