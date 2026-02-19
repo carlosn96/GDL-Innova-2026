@@ -22,7 +22,7 @@
 /* === BACKGROUND EFFECTS === */
 .hero-bg {
   background: 
-    radial-gradient(ellipse at center, color-mix(in srgb, var(--color-purple-400) 18%, transparent) 0%, transparent 70%),
+    radial-gradient(ellipse at center, color-mix(in srgb, var(--color-cyan-400) 12%, transparent) 0%, color-mix(in srgb, var(--color-purple-400) 16%, transparent) 45%, color-mix(in srgb, var(--color-pink-400) 12%, transparent) 100%),
     var(--gradient-hero);
 }
 

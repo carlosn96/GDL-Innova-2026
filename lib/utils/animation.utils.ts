@@ -44,8 +44,8 @@ export const generateParticles = (containerId: string, count: number = PARTICLE_
         }
       }
 
-      // 4) Final fallback to a minimal blue set (should be rare)
-      if (BLUE_PALETTE.length === 0) BLUE_PALETTE = ['#009e9a', '#5b2eff', '#ed1e79'];
+      // 4) Final fallback to theme variables
+      if (BLUE_PALETTE.length === 0) BLUE_PALETTE = ['var(--color-cyan-400)', 'var(--color-purple-400)', 'var(--color-pink-400)'];
     }
     const SIZE_OPTIONS = [2, 3, 4, 6, 10];
   

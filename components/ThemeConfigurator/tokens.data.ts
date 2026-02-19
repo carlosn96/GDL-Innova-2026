@@ -127,13 +127,13 @@ export function buildDefaultFamilies(): ColorFamily[] {
 
 export function buildDefaultGradients(): GradientToken[] {
   return [
-    grad('--gradient-primary',   'Degradado Primario',      'Fondo de secciones hero y banners principales',     135, [{ color: '#009e9a', position: 0 }, { color: '#5b2eff', position: 100 }]),
-    grad('--gradient-secondary', 'Degradado Secundario',    'Botones call-to-action y elementos muy destacados',  135, [{ color: '#5b2eff', position: 0 }, { color: '#ed1e79', position: 100 }]),
-    grad('--gradient-accent',    'Degradado de Acento',     'Pills, badges y pequeños detalles de energía',       135, [{ color: '#009e9a', position: 0 }, { color: '#ed1e79', position: 100 }]),
+    grad('--gradient-primary',   'Degradado Primario',      'Fondo de secciones hero y banners principales',     135, [{ color: 'var(--color-cyan-400)', position: 0 }, { color: 'var(--color-purple-400)', position: 100 }]),
+    grad('--gradient-secondary', 'Degradado Secundario',    'Botones call-to-action y elementos muy destacados',  135, [{ color: 'var(--color-purple-400)', position: 0 }, { color: 'var(--color-pink-400)', position: 100 }]),
+    grad('--gradient-accent',    'Degradado de Acento',     'Pills, badges y pequeños detalles de energía',       135, [{ color: 'var(--color-cyan-400)', position: 0 }, { color: 'var(--color-pink-400)', position: 100 }]),
     grad('--gradient-hero',      'Degradado del Escenario', 'Fondo panorámico de la sección principal del sitio', 135, [
-      { color: '#151216', position: 0 },
-      { color: '#201c1f', position: 55 },
-      { color: '#2a252a', position: 100 },
+      { color: 'var(--bg-dark-primary)', position: 0 },
+      { color: 'var(--bg-dark-secondary)', position: 55 },
+      { color: 'var(--bg-dark-tertiary)', position: 100 },
     ]),
   ];
 }
