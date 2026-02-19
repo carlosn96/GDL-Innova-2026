@@ -9,61 +9,61 @@ export const theme = {
   colors: {
     primary: {
       cyan: {
-        100: '#e0f7ff',
-        200: '#b3ecff',
-        300: '#86e1ff',
-        400: '#00f2fe',
-        500: '#00c9db',
-        600: '#00a0b8'
+        100: '#d9f5f3',
+        200: '#aee8e5',
+        300: '#73d2cd',
+        400: '#009e9a',
+        500: '#007f7c',
+        600: '#006866'
       },
       purple: {
-        100: '#f3e8ff',
-        200: '#e9d5ff',
-        300: '#d8b4fe',
-        400: '#8b5cf6',
-        500: '#7c3aed',
-        600: '#6d28d9'
+        100: '#ece6ff',
+        200: '#d8ccff',
+        300: '#b49dff',
+        400: '#5b2eff',
+        500: '#4a25d6',
+        600: '#3d1fae'
       },
       pink: {
-        100: '#fce7f3',
-        200: '#fbcfe8',
-        300: '#f9a8d4',
-        400: '#ec4899',
-        500: '#db2777',
-        600: '#be185d'
+        100: '#fde5f0',
+        200: '#fac5de',
+        300: '#f58fbc',
+        400: '#ed1e79',
+        500: '#cf1668',
+        600: '#aa1155'
       }
     },
     
     background: {
       dark: {
-        primary: '#0f0f23',
-        secondary: '#1a1a3e',
-        tertiary: '#2d1b69',
-        quaternary: '#4c1d95',
-        quinary: '#7c2d92'
+        primary: '#151216',
+        secondary: '#201c1f',
+        tertiary: '#2a252a',
+        quaternary: '#332d33',
+        quinary: '#3d353e'
       }
     },
     
     text: {
       primary: '#ffffff',
-      secondary: '#a5f3fc',
-      tertiary: '#cbd5e1',
+      secondary: '#e4e7f8',
+      tertiary: '#cfd6ea',
       muted: '#94a3b8'
     }
   },
   
   gradients: {
     primary: {
-      cyan: 'from-cyan-500 to-blue-600',
+      cyan: 'from-cyan-500 to-cyan-600',
       purple: 'from-purple-500 to-pink-600',
-      pink: 'from-pink-500 to-red-600',
+      pink: 'from-pink-500 to-pink-600',
       mixed: 'from-cyan-500 to-purple-600',
       hero: 'from-cyan-400 via-purple-400 to-pink-400'
     },
     
     background: {
-      main: 'linear-gradient(135deg, #0f0f23 0%, #1a1a3e 25%, #2d1b69 50%, #4c1d95 75%, #7c2d92 100%)',
-      hero: 'radial-gradient(ellipse at center, rgba(103, 126, 234, 0.15) 0%, transparent 70%)'
+      main: 'linear-gradient(135deg, #151216 0%, #201c1f 55%, #2a252a 100%)',
+      hero: 'radial-gradient(ellipse at center, rgba(0, 158, 154, 0.16) 0%, transparent 70%)'
     }
   },
   
@@ -119,7 +119,7 @@ export const theme = {
   typography: {
     fonts: {
       primary: 'var(--font-inter)',
-      heading: 'var(--font-orbitron)'
+      heading: 'var(--font-inter)'
     },
     
     sizes: {
