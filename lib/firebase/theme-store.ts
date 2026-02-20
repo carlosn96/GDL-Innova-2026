@@ -1,29 +1,21 @@
-import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { get, ref, set } from 'firebase/database';
 
 import type { ColorFamily, GradientToken } from '@/components/ThemeConfigurator/tokens.data';
 import type { TypographySelection } from '@/config/fonts.config';
 
-import { getFirestoreDb, isFirebaseConfigured } from './client';
+import { getRTDB, isFirebaseConfigured } from './client';
 
-const THEMES_COLLECTION = 'themes';
-const DEFAULT_THEME_DOC_ID = 'gdlinova';
+const DEFAULT_THEME_PATH = 'themes/gdlinova';
 
-function toFirestoreSafe(value: unknown): unknown {
-  if (value === undefined) {
-    return null;
-  }
-
-  if (Array.isArray(value)) {
-    return value.map((item) => toFirestoreSafe(item));
-  }
-
+/** Elimina valores `undefined` que RTDB no acepta */
+function clean(value: unknown): unknown {
+  if (value === undefined) return null;
+  if (Array.isArray(value)) return value.map(clean);
   if (value && typeof value === 'object') {
-    const objectValue = value as Record<string, unknown>;
     return Object.fromEntries(
-      Object.entries(objectValue).map(([key, nestedValue]) => [key, toFirestoreSafe(nestedValue)]),
+      Object.entries(value as Record<string, unknown>).map(([k, v]) => [k, clean(v)]),
     );
   }
-
   return value;
 }
 
@@ -38,22 +30,14 @@ export interface ThemeSnapshot {
   updatedAt?: unknown;
 }
 
-export async function loadThemeFromFirestore(themeId = DEFAULT_THEME_DOC_ID): Promise<ThemeSnapshot | null> {
-  if (!isFirebaseConfigured()) {
-    return null;
-  }
+export async function loadThemeFromFirestore(themePath = DEFAULT_THEME_PATH): Promise<ThemeSnapshot | null> {
+  if (!isFirebaseConfigured()) return null;
 
-  const themeRef = doc(getFirestoreDb(), THEMES_COLLECTION, themeId);
-  const snapshot = await getDoc(themeRef);
+  const snapshot = await get(ref(getRTDB(), themePath));
+  if (!snapshot.exists()) return null;
 
-  if (!snapshot.exists()) {
-    return null;
-  }
-
-  const data = snapshot.data() as Partial<ThemeSnapshot>;
-  if (!Array.isArray(data.families) || !Array.isArray(data.gradients)) {
-    return null;
-  }
+  const data = snapshot.val() as Partial<ThemeSnapshot>;
+  if (!Array.isArray(data.families) || !Array.isArray(data.gradients)) return null;
 
   return {
     families: data.families as ColorFamily[],
@@ -69,21 +53,15 @@ export async function loadThemeFromFirestore(themeId = DEFAULT_THEME_DOC_ID): Pr
 
 export async function saveThemeToFirestore(
   payload: Pick<ThemeSnapshot, 'families' | 'gradients'> & Partial<Pick<ThemeSnapshot, 'sectionBaseColor' | 'sectionFilters' | 'typography' | 'eventName' | 'devElements'>>,
-  themeId = DEFAULT_THEME_DOC_ID,
+  themePath = DEFAULT_THEME_PATH,
 ): Promise<void> {
   if (!isFirebaseConfigured()) {
-    throw new Error('Firebase no está configurado. Define las variables NEXT_PUBLIC_FIREBASE_*');
+    throw new Error('Firebase no está configurado. Define NEXT_PUBLIC_FIREBASE_API_KEY y NEXT_PUBLIC_FIREBASE_DATABASE_URL');
   }
 
-  const themeRef = doc(getFirestoreDb(), THEMES_COLLECTION, themeId);
-  const safePayload = toFirestoreSafe(payload);
+  // RTDB hace merge manual: leer primero, luego escribir
+  const existing = await loadThemeFromFirestore(themePath);
+  const merged = { ...(existing ?? {}), ...payload, updatedAt: Date.now() };
 
-  await setDoc(
-    themeRef,
-    {
-      ...((safePayload ?? {}) as Record<string, unknown>),
-      updatedAt: serverTimestamp(),
-    },
-    { merge: true },
-  );
+  await set(ref(getRTDB(), themePath), clean(merged));
 }

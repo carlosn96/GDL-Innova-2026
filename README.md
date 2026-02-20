@@ -109,20 +109,15 @@ npm run lint
 
 ### Variables de Entorno
 
-Para persistir la paleta del `ThemeConfigurator` en Firestore, crea un archivo `.env.local`
-basado en `.env.example`:
+Para persistir la paleta del `ThemeConfigurator` en Firebase Realtime Database, crea un archivo `.env.local`:
 
-```bash
-cp .env.example .env.local
-```
-
-Variables necesarias:
+Variables necesarias (mínimo obligatorio: `API_KEY` + `DATABASE_URL`):
 
 ```bash
 ENV=development
 NEXT_PUBLIC_FIREBASE_API_KEY=
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_DATABASE_URL=https://<tu-proyecto>-default-rtdb.firebaseio.com
 NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
@@ -131,12 +126,23 @@ NEXT_PUBLIC_FIREBASE_APP_ID=
 - Con `ENV=development` se habilita el modo de personalización visual (`ThemeConfigurator`).
 - En cualquier otro valor de `ENV`, el configurador se oculta.
 
-### Firestore (tema)
+### Realtime Database (tema)
 
-- Crea un proyecto en Firebase Console.
-- Habilita Firestore Database en modo nativo.
-- Crea una app Web y copia sus credenciales a `.env.local`.
-- El configurador guarda en la colección `themes`, documento `gdlinova`.
+- Habilita **Realtime Database** en Firebase Console.
+- Copia la URL (`https://<proyecto>-default-rtdb.firebaseio.com`) a `NEXT_PUBLIC_FIREBASE_DATABASE_URL`.
+- El configurador guarda en la ruta `themes/gdlinova`.
+- Reglas mínimas de seguridad (solo lectura pública, escritura autenticada o en modo test):
+
+```json
+{
+  "rules": {
+    "themes": {
+      ".read": true,
+      ".write": false
+    }
+  }
+}
+```
 
 ## 🎨 Design System
 

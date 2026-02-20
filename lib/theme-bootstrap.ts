@@ -81,6 +81,12 @@ const THEME_BOOTSTRAP_SCRIPT = `(function(){
   }
 })();`;
 
-export function getThemeBootstrapScript(): string {
+/**
+ * @param hasServerTheme - Cuando el servidor ya inyecta el CSS del tema (desde RTDB),
+ * el script de bootstrap no debe correr: el localStorage tendría mayor especificidad
+ * (inline style) y sobreescribiría el tema del servidor.
+ */
+export function getThemeBootstrapScript(hasServerTheme = false): string {
+  if (hasServerTheme) return '';
   return THEME_BOOTSTRAP_SCRIPT;
 }

@@ -97,8 +97,20 @@ interface SiteContextType {
 
 const SiteContext = createContext<SiteContextType | undefined>(undefined);
 
-export function SiteProvider({ children }: { children: ReactNode }) {
-  const [siteConfig, setSiteConfig] = useState<SiteConfig>(defaultSiteConfig);
+export function SiteProvider({
+  children,
+  initialConfig,
+}: {
+  children: ReactNode;
+  initialConfig?: Partial<SiteConfig>;
+}) {
+  // initialConfig (de RTDB vía servidor) tiene prioridad sobre los defaults hardcodeados
+  const baseConfig: SiteConfig = initialConfig
+    ? { ...defaultSiteConfig, ...initialConfig }
+    : defaultSiteConfig;
+
+  const baseConfigRef = useRef(baseConfig);
+  const [siteConfig, setSiteConfig] = useState<SiteConfig>(baseConfig);
   const hasMountedRef = useRef(false);
 
   useEffect(() => {
@@ -110,7 +122,7 @@ export function SiteProvider({ children }: { children: ReactNode }) {
 
     try {
       const parsed = JSON.parse(stored);
-      const nextConfig = { ...defaultSiteConfig, ...parsed };
+      const nextConfig = { ...baseConfigRef.current, ...parsed };
       const timer = window.setTimeout(() => {
         setSiteConfig(nextConfig);
         hasMountedRef.current = true;

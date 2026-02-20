@@ -195,6 +195,8 @@ interface ThemeDraftSnapshot {
   eventName: string;
   particlesPalette: string;
   devElements: Record<string, DevElementConfig>;
+  /** Timestamp ms — permite comparar con el snapshot del servidor */
+  updatedAt?: number;
 }
 
 function isDevTextRole(value: string): value is DevTextRole {
@@ -1008,31 +1010,51 @@ export default function ThemeConfigurator() {
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem(THEME_DRAFT_STORAGE_KEY);
-      if (!raw) return;
-      const draft = JSON.parse(raw) as Partial<ThemeDraftSnapshot>;
+      // Lee el snapshot del servidor embebido por SSR en window.__gdlinovaSnapshot
+      const serverSnapshot = (() => {
+        try {
+          return (window as unknown as { __gdlinovaSnapshot?: import('@/lib/firebase/theme-store').ThemeSnapshot }).__gdlinovaSnapshot ?? null;
+        } catch { return null; }
+      })();
 
-      if (Array.isArray(draft.families)) {
-        setFamilies(sanitizeFamilies(draft.families));
+      // Lee localStorage
+      let localDraft: (Partial<ThemeDraftSnapshot> & { updatedAt?: number }) | null = null;
+      try {
+        const raw = localStorage.getItem(THEME_DRAFT_STORAGE_KEY);
+        if (raw) localDraft = JSON.parse(raw);
+      } catch { /* ignore */ }
+
+      // Prioridad: localStorage si tiene timestamp más reciente que el snapshot del servidor.
+      // Esto permite al diseñador trabajar cambios locales sin que el servidor los pise.
+      // En producción (sin localStorage): el servidor siempre gana → sin flash.
+      const localTs = localDraft?.updatedAt ?? 0;
+      const serverTs = typeof serverSnapshot?.updatedAt === 'number' ? serverSnapshot.updatedAt : 0;
+      const useLocal = !!localDraft && localTs >= serverTs;
+
+      const source = useLocal ? localDraft : serverSnapshot;
+      if (!source) { hasLocalThemeDraftRef.current = false; return; }
+
+      if (Array.isArray(source.families)) {
+        setFamilies(sanitizeFamilies(source.families));
       }
-      setGradients(sanitizeGradients(draft.gradients));
-      if (typeof draft.sectionBaseColor === 'string') {
-        setSectionBaseColor(draft.sectionBaseColor);
+      setGradients(sanitizeGradients(source.gradients));
+      if (typeof (source as ThemeDraftSnapshot).sectionBaseColor === 'string') {
+        setSectionBaseColor((source as ThemeDraftSnapshot).sectionBaseColor);
       }
-      if (draft.sectionFilters && typeof draft.sectionFilters === 'object') {
-        setSectionFilters({ ...DEFAULT_SECTION_FILTERS, ...(draft.sectionFilters as Record<SectionId, string>) });
+      if (source.sectionFilters && typeof source.sectionFilters === 'object') {
+        setSectionFilters({ ...DEFAULT_SECTION_FILTERS, ...(source.sectionFilters as Record<SectionId, string>) });
       }
-      if (draft.typography && typeof draft.typography === 'object') {
-        setTypography({ ...DEFAULT_TYPOGRAPHY, ...(draft.typography as TypographyState) });
+      if (source.typography && typeof source.typography === 'object') {
+        setTypography({ ...DEFAULT_TYPOGRAPHY, ...(source.typography as TypographyState) });
       }
-      if (typeof draft.eventName === 'string' && draft.eventName.trim().length > 0) {
-        setEventName(draft.eventName);
+      if (typeof source.eventName === 'string' && source.eventName.trim().length > 0) {
+        setEventName(source.eventName);
       }
-      if (typeof draft.particlesPalette === 'string') {
-        setParticlesPalette(draft.particlesPalette);
+      if (typeof (source as ThemeDraftSnapshot).particlesPalette === 'string') {
+        setParticlesPalette((source as ThemeDraftSnapshot).particlesPalette);
       }
-      if (draft.devElements && typeof draft.devElements === 'object') {
-        setDevElements(sanitizeDevElements(draft.devElements));
+      if ((source as ThemeDraftSnapshot).devElements && typeof (source as ThemeDraftSnapshot).devElements === 'object') {
+        setDevElements(sanitizeDevElements((source as ThemeDraftSnapshot).devElements));
       }
       hasLocalThemeDraftRef.current = true;
     } catch {
@@ -1051,6 +1073,7 @@ export default function ThemeConfigurator() {
         eventName,
         particlesPalette,
         devElements,
+        updatedAt: Date.now(),
       };
       localStorage.setItem(THEME_DRAFT_STORAGE_KEY, JSON.stringify(draft));
     } catch {
