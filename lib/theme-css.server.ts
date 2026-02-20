@@ -190,14 +190,41 @@ export function snapshotToCSS(snapshot: ThemeSnapshot): string {
   L.push(`  --font-subheading: ${getFontStack(subheadingId)};`);
   L.push(`  --font-heading: ${getFontStack(headingId)};`);
 
-  // Partículas
-  L.push(`  --particles-palette: ${cyan[400]},${purple[400]},${pink[400]};`);
+  // Partículas: usar paleta guardada si existe, sino derivar de colores
+  const particlesPalette = snapshot.particlesPalette && snapshot.particlesPalette.trim().length > 0
+    ? snapshot.particlesPalette
+    : `${cyan[400]},${purple[400]},${pink[400]}`;
+  L.push(`  --particles-palette: ${particlesPalette};`);
 
   L.push('}');
   return L.join('\n');
 }
 
 // ─── Fetch desde Realtime Database (REST, sin SDK) ───────────────────────────
+
+/**
+ * Firebase RTDB convierte arrays a { "0": {...}, "1": {...} } en toda la jerarquía.
+ * Esta función normaliza recursivamente TODA la estructura: families[].tokens[], gradients[].stops[], etc.
+ */
+function rtdbNormalize(value: unknown): unknown {
+  if (value === null || value === undefined) return value;
+  if (typeof value !== 'object') return value;
+  if (Array.isArray(value)) return value.map(rtdbNormalize);
+
+  const obj = value as Record<string, unknown>;
+  const keys = Object.keys(obj);
+
+  // Si todas las claves son enteros => era un array disfrazado (solo si hay al menos una clave)
+  if (keys.length > 0 && keys.every((k) => /^\d+$/.test(k))) {
+    const maxIdx = Math.max(...keys.map(Number));
+    const arr: unknown[] = new Array(maxIdx + 1);
+    keys.forEach((k) => { arr[Number(k)] = rtdbNormalize(obj[k]); });
+    return arr.filter((v) => v !== undefined);
+  }
+
+  // Objeto real (o vacío): normalizar valores recursivamente
+  return Object.fromEntries(keys.map((k) => [k, rtdbNormalize(obj[k])]));
+}
 
 export const fetchThemeSnapshot = cache(async (): Promise<ThemeSnapshot | null> => {
   const dbUrl = process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL;
@@ -210,8 +237,14 @@ export const fetchThemeSnapshot = cache(async (): Promise<ThemeSnapshot | null> 
       next: { revalidate: 60 }, // revalida cada 60 s en producción
     });
     if (!res.ok) return null;
-    const data = (await res.json()) as Partial<ThemeSnapshot> | null;
-    if (!data || !Array.isArray(data.families) || !Array.isArray(data.gradients)) return null;
+    const raw = (await res.json()) as unknown;
+    if (!raw || typeof raw !== 'object') return null;
+
+    // Normaliza toda la jerarquía: families[].tokens[], gradients[].stops[], etc.
+    const data = rtdbNormalize(raw) as Partial<ThemeSnapshot>;
+    if (!Array.isArray(data.families) || !Array.isArray(data.gradients)) return null;
+    if (data.families.length === 0 || data.gradients.length === 0) return null;
+
     return data as ThemeSnapshot;
   } catch {
     return null;

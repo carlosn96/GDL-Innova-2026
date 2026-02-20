@@ -10,7 +10,7 @@
  * reemplazar styles/theme/tokens.css en el proyecto.
  */
 
-import { useState, useEffect, useCallback, useRef, type KeyboardEvent } from 'react';
+import { useState, useEffect, useLayoutEffect, useCallback, useRef, type KeyboardEvent } from 'react';
 import type { FirebaseError } from 'firebase/app';
 import { useSiteConfig } from '@/lib/site-context';
 import {
@@ -953,6 +953,29 @@ function LivePreview({ families, gradients }: { families: ColorFamily[]; gradien
   );
 }
 
+// ─── Lazy initializer: lee snapshot de servidor o localStorage en primer render ─
+// Se ejecuta sincrónicamente antes del primer paint → sin flash.
+
+type WindowWithSnapshot = Window & { __gdlinovaSnapshot?: import('@/lib/firebase/theme-store').ThemeSnapshot };
+
+function readInitialThemeSource(): (Partial<ThemeDraftSnapshot> & { updatedAt?: number }) | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const serverSnapshot = (window as unknown as WindowWithSnapshot).__gdlinovaSnapshot ?? null;
+    let localDraft: (Partial<ThemeDraftSnapshot> & { updatedAt?: number }) | null = null;
+    try {
+      const raw = localStorage.getItem(THEME_DRAFT_STORAGE_KEY);
+      if (raw) localDraft = JSON.parse(raw);
+    } catch { /* ignore */ }
+    const localTs = localDraft?.updatedAt ?? 0;
+    const serverTs = typeof serverSnapshot?.updatedAt === 'number' ? serverSnapshot.updatedAt : 0;
+    // localStorage gana si tiene timestamp >= snapshot del servidor
+    if (localDraft && localTs >= serverTs) return localDraft;
+    if (serverSnapshot) return serverSnapshot as unknown as Partial<ThemeDraftSnapshot> & { updatedAt?: number };
+    return localDraft;
+  } catch { return null; }
+}
+
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export default function ThemeConfigurator() {
@@ -961,6 +984,8 @@ export default function ThemeConfigurator() {
   const firestoreEnabled = isFirebaseConfigured();
   const { siteConfig, updateSiteConfig } = useSiteConfig();
   const [isOpen,   setIsOpen]   = useState(false);
+  // Estado inicial con defaults — se sobreescribe en useLayoutEffect antes del primer paint
+  // NO usar lazy initializers que lean window/localStorage: causan hydration mismatch
   const [families, setFamilies] = useState<ColorFamily[]>(buildDefaultFamilies);
   const [gradients, setGradients] = useState<GradientToken[]>(buildDefaultGradients);
   const [sectionBaseColor, setSectionBaseColor] = useState(DEFAULT_SECTION_BASE_COLOR);
@@ -992,75 +1017,45 @@ export default function ThemeConfigurator() {
   const applyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const folderFontInputRef = useRef<HTMLInputElement>(null);
   const hasLocalThemeDraftRef = useRef(false);
+  const particlesFromSnapshotRef = useRef(false); // true si particlesPalette vino del snapshot
 
   // Update site config when eventName changes
   useEffect(() => {
     updateSiteConfig({ name: eventName });
   }, [eventName, updateSiteConfig]);
 
-  // Initialize particles palette from existing CSS on mount
+  // Initialize particles palette from existing CSS on mount — solo si el snapshot no trajo valor
   useEffect(() => {
     try {
+      if (particlesFromSnapshotRef.current) return; // ya cargado desde snapshot/localStorage
       const v = getComputedStyle(document.documentElement).getPropertyValue('--particles-palette').trim();
       if (v) setParticlesPalette(v);
     } catch {
       // ignore in SSR or environments without window
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    try {
-      // Lee el snapshot del servidor embebido por SSR en window.__gdlinovaSnapshot
-      const serverSnapshot = (() => {
-        try {
-          return (window as unknown as { __gdlinovaSnapshot?: import('@/lib/firebase/theme-store').ThemeSnapshot }).__gdlinovaSnapshot ?? null;
-        } catch { return null; }
-      })();
-
-      // Lee localStorage
-      let localDraft: (Partial<ThemeDraftSnapshot> & { updatedAt?: number }) | null = null;
-      try {
-        const raw = localStorage.getItem(THEME_DRAFT_STORAGE_KEY);
-        if (raw) localDraft = JSON.parse(raw);
-      } catch { /* ignore */ }
-
-      // Prioridad: localStorage si tiene timestamp más reciente que el snapshot del servidor.
-      // Esto permite al diseñador trabajar cambios locales sin que el servidor los pise.
-      // En producción (sin localStorage): el servidor siempre gana → sin flash.
-      const localTs = localDraft?.updatedAt ?? 0;
-      const serverTs = typeof serverSnapshot?.updatedAt === 'number' ? serverSnapshot.updatedAt : 0;
-      const useLocal = !!localDraft && localTs >= serverTs;
-
-      const source = useLocal ? localDraft : serverSnapshot;
-      if (!source) { hasLocalThemeDraftRef.current = false; return; }
-
-      if (Array.isArray(source.families)) {
-        setFamilies(sanitizeFamilies(source.families));
-      }
-      setGradients(sanitizeGradients(source.gradients));
-      if (typeof (source as ThemeDraftSnapshot).sectionBaseColor === 'string') {
-        setSectionBaseColor((source as ThemeDraftSnapshot).sectionBaseColor);
-      }
-      if (source.sectionFilters && typeof source.sectionFilters === 'object') {
-        setSectionFilters({ ...DEFAULT_SECTION_FILTERS, ...(source.sectionFilters as Record<SectionId, string>) });
-      }
-      if (source.typography && typeof source.typography === 'object') {
-        setTypography({ ...DEFAULT_TYPOGRAPHY, ...(source.typography as TypographyState) });
-      }
-      if (typeof source.eventName === 'string' && source.eventName.trim().length > 0) {
-        setEventName(source.eventName);
-      }
-      if (typeof (source as ThemeDraftSnapshot).particlesPalette === 'string') {
-        setParticlesPalette((source as ThemeDraftSnapshot).particlesPalette);
-      }
-      if ((source as ThemeDraftSnapshot).devElements && typeof (source as ThemeDraftSnapshot).devElements === 'object') {
-        setDevElements(sanitizeDevElements((source as ThemeDraftSnapshot).devElements));
-      }
-      hasLocalThemeDraftRef.current = true;
-    } catch {
-      hasLocalThemeDraftRef.current = false;
+  // ── Carga snapshot/localStorage ANTES del primer paint (useLayoutEffect = síncrono pre-paint)
+  // No se ejecuta en SSR → sin hydration mismatch. React re-renderiza antes de que el navegador pinte.
+  useLayoutEffect(() => {
+    const src = readInitialThemeSource();
+    if (!src) { hasLocalThemeDraftRef.current = false; return; }
+    if (Array.isArray(src.families) && src.families.length > 0) setFamilies(sanitizeFamilies(src.families));
+    setGradients(sanitizeGradients(src.gradients));
+    if (typeof src.sectionBaseColor === 'string') setSectionBaseColor(src.sectionBaseColor);
+    if (src.sectionFilters) setSectionFilters({ ...DEFAULT_SECTION_FILTERS, ...(src.sectionFilters as Record<SectionId, string>) });
+    if (src.typography) setTypography({ ...DEFAULT_TYPOGRAPHY, ...(src.typography as TypographyState) });
+    if (typeof src.eventName === 'string' && src.eventName.trim().length > 0) setEventName(src.eventName);
+    if (typeof (src as ThemeDraftSnapshot).particlesPalette === 'string') {
+      setParticlesPalette((src as ThemeDraftSnapshot).particlesPalette);
+      particlesFromSnapshotRef.current = true;
     }
+    if ((src as ThemeDraftSnapshot).devElements) setDevElements(sanitizeDevElements((src as ThemeDraftSnapshot).devElements));
+    hasLocalThemeDraftRef.current = true;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   useEffect(() => {
     try {
@@ -1311,7 +1306,7 @@ export default function ThemeConfigurator() {
     setCloudError(null);
     setSavingCloud(true);
     try {
-      await saveThemeToFirestore({ families, gradients, sectionBaseColor, sectionFilters, typography, eventName });
+      await saveThemeToFirestore({ families, gradients, sectionBaseColor, sectionFilters, typography, eventName, particlesPalette });
       setSavedCloud(true);
       setTimeout(() => setSavedCloud(false), 3000);
     } catch (error) {
