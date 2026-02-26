@@ -1,5 +1,5 @@
 /**
- * Tracks Data - Datos de los retos estratégicos del hackathon
+ * Tracks Data - Datos de los retos estratégicos del HACKATHON
  * 
  * Centraliza toda la información de los retos para evitar hardcodeo
  * y facilitar actualizaciones.
