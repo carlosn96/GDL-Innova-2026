@@ -29,11 +29,6 @@ export const navigationLinks: LinkConfig[] = [
     icon: 'fas fa-route'
   },
   {
-    href: '#tech',
-    label: 'Stack',
-    icon: 'fas fa-layer-group'
-  },
-  {
     href: '#evaluation',
     label: 'Evaluación',
     icon: 'fas fa-clipboard-check'
