@@ -24,7 +24,7 @@
 
   /* Text Colors */
   --text-primary: #ffffff;
-  --text-secondary: #e4e7f8;
+  --text-secondary: #009e9a;
   --text-tertiary: color-mix(in srgb, var(--text-secondary) 72%, white);
   --text-muted: #94a3b8;
 
@@ -51,9 +51,9 @@
   --section-filter-footer: transparent;
 
   /* === TYPOGRAPHY === */
-  --font-primary: var(--font-inter), sans-serif;
-  --font-subheading: var(--font-inter), sans-serif;
-  --font-heading: var(--font-inter), sans-serif;
+  --font-primary: var(--font-averta-regular), sans-serif;
+  --font-subheading: var(--font-averta-bold), sans-serif;
+  --font-heading: var(--font-averta-black), sans-serif;
 
   /* === EFFECTS === */
   --glass-bg: rgba(255, 255, 255, 0.05);

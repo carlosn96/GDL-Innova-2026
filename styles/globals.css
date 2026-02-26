@@ -25,7 +25,7 @@ body {
 }
 
 body {
-  background: var(--gradient-hero);
+  background: var(--bg-dark-secondary);
   min-height: 100vh;
   margin: 0;
   padding: 0;

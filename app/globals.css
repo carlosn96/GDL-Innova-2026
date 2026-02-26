@@ -23,19 +23,22 @@ body {
     margin: 0;
     padding: 0;
     font-family: var(--font-primary);
+    font-weight: 400;
     color: var(--text-primary);
 }
 
-h1,
+h1 {
+    font-family: var(--font-heading);
+    font-weight: 900;
+}
+
+h2,
 h3,
 h4,
 h5,
 h6 {
-    font-family: var(--font-heading);
-}
-
-h2 {
     font-family: var(--font-subheading);
+    font-weight: 700;
 }
 
 .theme-font-primary { font-family: var(--font-primary); }
@@ -126,7 +129,7 @@ h2 {
     z-index: 0;
 }
 
-.site-section[data-section='hero']::before { background: var(--section-filter-hero, transparent); }
+.site-section[data-section='hero']::before { background: transparent; }
 .site-section[data-section='about']::before { background: var(--section-filter-about, transparent); }
 .site-section[data-section='schedule']::before { background: var(--section-filter-schedule, transparent); }
 .site-section[data-section='tracks']::before { background: var(--section-filter-tracks, transparent); }
@@ -392,9 +395,7 @@ html {
 }
 
 .hero-bg {
-    background: 
-      radial-gradient(ellipse at center, color-mix(in srgb, var(--color-cyan-400) 12%, transparent) 0%, color-mix(in srgb, var(--color-purple-400) 16%, transparent) 45%, color-mix(in srgb, var(--color-pink-400) 12%, transparent) 100%),
-      var(--gradient-hero);
+    background: var(--bg-dark-secondary);
 }
 
 .scroll-indicator {
