@@ -23,7 +23,6 @@ export default function Home() {
       <About />
       <Schedule />
       <Tracks />
-      <Tech />
       <Evaluation />
       <CTA />
       <Footer />
