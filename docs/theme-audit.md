@@ -53,7 +53,6 @@
 - `styles/utils/helpers.css`: helpers visuales conectados a variables.
 - `lib/utils/format.utils.ts`: resolución de tokens de gradiente.
 - `lib/utils/animation.utils.ts`: partículas y fallback de paleta simplificados.
-- `components/ThemeConfigurator/*`: defaults y presets alineados a paleta simplificada.
 
 ## Reducción aplicada
 
@@ -61,7 +60,6 @@
 - Se eliminaron combinaciones de gradiente `blue-*` y `red-*` en secciones y datasets.
 - Se unificó tipografía en **Inter** para `primary`, `subheading` y `heading`.
 - Se sustituyeron hardcodes de color en estilos globales/helpers por variables de tema.
-- El configurador quedó en **modo simple fijo**: solo variables base (primario/secundario/acento, texto y fondo).
 - Las variaciones (`100/200/300/500/600`) se derivan automáticamente desde los colores `400`.
 - Mapa de degradados fijo y explícito:
 	- `--gradient-primary`: títulos y botón principal.
