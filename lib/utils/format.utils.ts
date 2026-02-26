@@ -8,7 +8,8 @@
  * Formatea un rango de tiempo
  */
 export const formatTimeRange = (start: string, end: string): string => {
-  return `${start} - ${end}`;
+  return `${start}`;
+  //return `${start} - ${end}`;
 };
 
 const COLOR_TOKEN_FALLBACKS: Record<string, string> = {
