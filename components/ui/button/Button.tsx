@@ -13,7 +13,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', fullWidth, children, ...props }, ref) => {
-    const baseStyles = 'inline-flex items-center justify-center rounded-full font-bold transition-all duration-300 transform hover:scale-105';
+    const baseStyles = 'inline-flex items-center justify-center rounded-full theme-font-subheading font-bold transition-all duration-300 transform hover:scale-105';
     
     const variants = {
       primary: 'px-8 py-4 theme-btn-primary',

@@ -23,7 +23,7 @@ export default function Navigation() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3">
               <img src="/logo.svg" alt={`${siteConfig.organization.name} Logo`} className="w-10 h-10" />
-              <span className="theme-text-primary theme-font-heading font-bold text-xl">{siteConfig.name}</span>
+              <span className="theme-text-primary theme-font-heading font-black text-xl">{siteConfig.name.toUpperCase()}</span>
             </div>
 
             <div className="hidden md:flex items-center space-x-8">
@@ -31,7 +31,7 @@ export default function Navigation() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="theme-accent-cyan-soft theme-interactive transition"
+                  className="theme-accent-cyan-soft theme-font-primary theme-interactive transition"
                 >
                   {link.label}
                 </a>
@@ -58,7 +58,7 @@ export default function Navigation() {
               <a
                 key={link.href}
                 href={link.href}
-                className="mobile-menu-link block px-3 py-2 theme-accent-cyan-soft theme-interactive"
+                  className="mobile-menu-link block px-3 py-2 theme-accent-cyan-soft theme-font-primary theme-interactive"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}

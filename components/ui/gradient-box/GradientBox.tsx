@@ -13,6 +13,7 @@ export interface GradientBoxProps extends HTMLAttributes<HTMLDivElement> {
   size?: 'sm' | 'md' | 'lg' | 'xl';
   shape?: 'square' | 'circle' | 'rounded';
   iconSize?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  iconColor?: string;
   children?: ReactNode;
 }
 
@@ -25,6 +26,7 @@ export const GradientBox = forwardRef<HTMLDivElement, GradientBoxProps>(
     size = 'md',
     shape = 'rounded',
     iconSize = 'xl',
+    iconColor = 'theme-text-primary',
     children,
     ...props 
   }, ref) => {
@@ -41,7 +43,9 @@ export const GradientBox = forwardRef<HTMLDivElement, GradientBoxProps>(
       rounded: 'rounded-xl'
     };
 
-    const gradientStyle = buildGradientStyle(gradientFrom, gradientTo);
+    const gradientStyle = gradientFrom.startsWith('#') && gradientTo.startsWith('#') 
+      ? `linear-gradient(360deg, ${gradientFrom}, ${gradientTo})`
+      : buildGradientStyle(gradientFrom, gradientTo);
 
     return (
       <div
@@ -55,7 +59,7 @@ export const GradientBox = forwardRef<HTMLDivElement, GradientBoxProps>(
         style={{ backgroundImage: gradientStyle }}
         {...props}
       >
-        {icon && <Icon name={icon} size={iconSize} className="theme-text-primary" />}
+        {icon && <Icon name={icon} size={iconSize} className={iconColor} />}
         {children}
       </div>
     );

@@ -27,23 +27,23 @@ export default function HeroSection() {
     {
       id: 'duration',
       icon: 'fas fa-calendar',
-      gradient: { from: 'cyan-500', to: 'cyan-600' },
+      gradient: { from: '#035164', to: '#009E9A' },
       title: 'Duración',
       value: '2 Días Intensivos'
     },
     {
       id: 'teams',
       icon: 'fas fa-users',
-      gradient: { from: 'purple-500', to: 'pink-600' },
+      gradient: { from: '#035164', to: '#009E9A' },
       title: 'Equipos',
       value: 'Multidisciplinarios'
     },
     {
       id: 'focus',
-      icon: 'fas fa-map-marker-alt',
-      gradient: { from: 'pink-500', to: 'pink-600' },
-      title: 'Enfoque',
-      value: 'Guadalajara Local'
+      icon: 'fas fa-school-flag',
+      gradient: { from: '#035164', to: '#009E9A' },
+      title: 'Planteles',
+      value: 'Centro y Zapopan'
     }
   ];
 
@@ -60,7 +60,7 @@ export default function HeroSection() {
       <div id="neuralNetwork" className="neural-network" />
 
       {/* Main Content */}
-      <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
+      <div className="relative z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
         
 
         {/* Logo 
@@ -68,25 +68,25 @@ export default function HeroSection() {
         */}
         
         {/* Title */}
-        <h1 className="text-8xl md:text-8xl theme-text-primary theme-font-heading tracking- mb-6 neon-text">
-          <span className="bg-clip-text text-transparent theme-font-heading" style={{ backgroundImage: 'var(--gradient-primary)' }}>
-            {siteConfig.name}
+        <h1 className="text-8xl md:text-8xl theme-text-primary theme-font-heading font-black mb-6">
+          <span className="bg-clip-text theme-font-heading" style={{ backgroundImage: 'var(--gradient-primary)' }}>
+            {siteConfig.name.toUpperCase()}
           </span>
         </h1>
 
         {/* Subtitle */}
-        <h2 className="text-3xl md:text-4xl theme-text-secondary mb-4">
+        <h2 className="text-3xl md:text-5xl theme-font-subheading font-bold theme-text-secondary mb-4">
           Co-Creación Interdisciplinaria IA
         </h2>
 
         {/* Description */}
-        <p className="text-xl md:text-2xl theme-text-secondary mb-8 max-w-3xl mx-auto">
-          Colaboración entre {' '}
-          <span className="theme-accent-pink font-semibold">
+        <p className="text-center text-xl md:text-3xl theme-font-primary mb-8 whitespace-nowrap">
+          Colaboración entre{' '}
+          <span className="theme-accent-pink theme-font-subheading font-semibold">
             {siteConfig.organization.departments.design}
-          </span>{' '}
-          e{' '}
-          <span className="theme-accent-purple font-semibold">
+          </span>
+          {' '}e{' '}
+          <span className="theme-accent-purple theme-font-subheading font-semibold">
             {siteConfig.organization.departments.engineering}
           </span>
         </p>
@@ -109,10 +109,11 @@ export default function HeroSection() {
                 gradientTo={stat.gradient.to}
                 size="md"
                 shape="rounded"
+                iconColor=""
                 className="mx-auto mb-4"
               />
-              <h3 className="theme-accent-cyan-soft font-bold mb-2">{stat.title}</h3>
-              <p className="theme-text-primary">{stat.value}</p>
+              <h3 className="theme-font-subheading font-bold mb-2">{stat.title}</h3>
+              <p className="theme-font-primary text-sm">{stat.value}</p>
             </Card>
           ))}
         </div>
@@ -121,9 +122,10 @@ export default function HeroSection() {
         <div className="mt-12">
           <a
             href="#about"
-            className="inline-block px-8 py-4 rounded-full theme-btn-primary font-bold text-lg transition-all duration-300 transform hover:scale-105"
+            className="inline-block px-8 py-4 rounded-full bg-gradient-to-b from-pink-400 theme-font-subheading transition-all duration-300 transform hover:scale-105 shadow-lg"
+            style={{ color: 'var(--text-primary)' }}
           >
-            Conoce Más
+            <span className="theme-text-primary font-bold mb-2">Conoce más</span>
             <Icon name="fas fa-arrow-down" className="ml-2" size="sm" />
           </a>
         </div>

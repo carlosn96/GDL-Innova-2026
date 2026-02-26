@@ -1,83 +1,72 @@
 'use client';
 
 import { scheduleData } from '@/data';
-import { useSiteConfig } from '@/lib/site-context';
-import { Card, GradientBox, Icon } from './ui';
+import { Card, GradientBox } from './ui';
 import { formatTimeRange } from '@/lib/utils';
 
 export default function Schedule() {
-  const { siteConfig } = useSiteConfig();
   return (
     <section id="schedule" data-section="schedule" className="site-section py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black theme-text-primary mb-4">
-            <span className="theme-title-gradient bg-clip-text text-transparent">
-              Cronograma Intensivo
+          <h2 className="text-4xl md:text-5xl font-bold theme-text-primary theme-font-subheading mb-4">
+            <span className="theme-text-secondary bg-clip-text text-transparent">
+              Cronograma
             </span>
           </h2>
-          <p className="theme-text-secondary text-xl">
-            {siteConfig.event.duration.schedule} • Dos días de colaboración y ejecución
-          </p>
         </div>
 
-        <div id="scheduleContent">
-          {scheduleData.map(day => (
-            <div key={day.dayNumber} className={day.dayNumber === 1 ? 'mb-12' : ''}>
-              <Card variant="glass" padding="lg" className="mb-8">
-                <div className="flex items-center justify-center mb-6">
-                  <GradientBox
-                    gradientFrom={day.dayNumber === 1 ? 'cyan-500' : 'purple-500'}
-                    gradientTo={day.dayNumber === 1 ? 'cyan-600' : 'pink-600'}
-                    size="lg"
-                    shape="circle"
-                  >
-                    <span className="theme-text-primary font-black text-2xl">{day.dayNumber}</span>
-                  </GradientBox>
-                </div>
-                <h3 className={`text-3xl font-bold text-center mb-2 ${
-                  day.dayNumber === 1 ? 'theme-accent-cyan-soft' : 'theme-accent-pink-soft'
-                }`}>{day.title}</h3>
-                <p className="text-center theme-text-tertiary mb-8">{day.subtitle}</p>
-                <p className={`text-center text-lg font-semibold mb-8 ${
-                  day.dayNumber === 1 ? 'theme-text-secondary' : 'theme-accent-pink-soft'
-                }`}>
-                  <Icon name="fas fa-bullseye" className="mr-2" />
-                  {day.objective}
-                </p>
-              </Card>
+        <div id="scheduleContent" className="space-y-12">
+          {scheduleData.map((day) => (
+            <Card key={day.dayNumber} variant="glass" padding="lg" className="overflow-hidden">
+              <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
 
-              <div className="space-y-4 timeline-3d">
-                {day.activities.map((activity) => (
-                  <Card 
-                    key={activity.id} 
-                    variant="glass" 
-                    padding="md" 
-                    className={`timeline-item-3d ${activity.isSpecial ? 'border-2 theme-border-muted' : ''}`}
+                {/* Left: Date & Location Panel with purple→pink gradient */}
+                <div className="lg:w-64 flex-shrink-0">
+                  <div
+                    className="rounded-2xl p-6 lg:p-8 flex flex-col items-center justify-center text-center h-full"
+                    style={{
+                      backgroundImage: 'linear-gradient(135deg, #035164 80%, #009E9A 70%)',
+                    }}
                   >
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                      <div className="flex items-center mb-4 md:mb-0">
-                        <GradientBox
-                          icon={activity.icon}
-                          gradientFrom={activity.gradient.from}
-                          gradientTo={activity.gradient.to}
-                          size="md"
-                          shape="rounded"
-                          className="mr-4"
-                        />
-                        <div>
-                          <h4 className="font-bold text-lg theme-accent-cyan-soft">{activity.title}</h4>
-                          <p className="theme-text-muted text-sm">
-                            {formatTimeRange(activity.timeRange.start, activity.timeRange.end)}
-                          </p>
+                    <span
+                      className="text-[10rem] md:text-[12rem] theme-text-primary theme-font-heading font-black leading-none mb-1"
+                    >
+                      {day.dayOfMonth}
+                    </span>
+                    <span className="text-3xl font-semibold theme-text-primary theme-font-subheading uppercase tracking-wide">{day.month}</span>
+
+                    <div className="w-12 border border-white/10 my-4" />
+
+                    <span className="text-xl font-bold theme-text-primary uppercase tracking-widest">
+                      {day.location}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Right: Activity List */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="theme-font-subheading font-bold text-xl theme-text-primary mb-3">
+                    {day.title}
+                  </h3>
+
+                  <div className="space-y-3">
+                    {day.activities.map((activity) => (
+                      <div key={activity.id} className={`rounded-xl p-4 transition-all duration-300 hover:scale-[1.01] ${activity.isSpecial ? 'border theme-border-muted' : 'border border-white/5'}`} style={{ background: 'rgba(255,255,255,0.03)' }}>
+                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-[auto_7rem_1fr] sm:items-center sm:gap-4">
+                          <GradientBox icon={activity.icon} gradientFrom={activity.gradient.from} gradientTo={activity.gradient.to} size="md" shape="rounded" iconColor="theme-text" />
+                          <p className="text-xl">{formatTimeRange(activity.timeRange.start, activity.timeRange.end)}</p>
+                          <div className="flex flex-col items-start text-left gap-1">
+                            <h4 className="theme-font-subheading font-bold text-xl theme-text-primary">{activity.title}</h4>
+                            <p className="theme-text-muted theme-font-primary text-xs max-w-none">{activity.description}</p>
+                          </div>
                         </div>
                       </div>
-                      <p className="theme-text-tertiary text-sm md:ml-16">{activity.description}</p>
-                    </div>
-                  </Card>
-                ))}
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       </div>

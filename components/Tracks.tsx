@@ -35,14 +35,11 @@ export default function Tracks() {
       <section id="tracks" data-section="tracks" className="site-section py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black theme-text-primary mb-4">
-              <span className="theme-title-gradient bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold theme-font-subheading theme-text-primary mb-4">
+              <span className="theme-text-secondary bg-clip-text text-transparent">
                 Reto 2026
               </span>
             </h2>
-            <p className="theme-text-secondary text-xl">
-              &quot;Escuelas seguras&quot;
-            </p>
           </div>
 
           <div className="max-w-3xl mx-auto">
@@ -50,32 +47,45 @@ export default function Tracks() {
               <Card
                 key={challenge.id}
                 variant="glass"
-                className="p-8 challenge-card group cursor-pointer"
+                className="p-8 rounded-2xl challenge-card group cursor-pointer focus-within:ring-2 focus-within:ring-white/20"
                 onClick={() => openChallengeModal(challenge)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openChallengeModal(challenge);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label={`Abrir detalle del reto ${challenge.title}`}
               >
                 <GradientBox
                   gradientFrom={challenge.gradient.from}
                   gradientTo={challenge.gradient.to}
                   icon={challenge.icon}
-                  className="w-20 h-20 rounded-xl mx-auto mb-6 morphing-shape"
+                  iconSize="2xl"
+                  className="w-20 h-20 rounded-xl mx-auto mb-5 morphing-shape"
                 />
-                <h3 className="text-2xl font-bold text-center mb-4 theme-accent-cyan-soft">
+                <h3 className="text-2xl font-bold theme-font-subheading theme-text-primary text-center mb-3">
                   {challenge.title}
                 </h3>
-                <p className="theme-text-tertiary text-center leading-relaxed">
+                <p className="theme-font-primary text-center leading-relaxed">
                   {challenge.description}
                 </p>
-                <div className="mt-6 text-center">
+                <div className="mt-6 flex flex-wrap justify-center gap-2">
                   {challenge.tags.map((tag) => (
                     <Badge
                       key={tag.label}
                       color={tag.color as 'cyan' | 'purple' | 'pink'}
-                      className="mx-1"
                     >
                       <Icon name="fas fa-tag" className="mr-2" />
                       {tag.label}
                     </Badge>
                   ))}
+                </div>
+                <div className="mt-6 flex items-center justify-center gap-2 theme-text-secondary theme-font-subheading font-bold text-sm">
+                  <span>Ver detalles</span>
+                  <Icon name="fas fa-arrow-right" size="sm" />
                 </div>
               </Card>
             ))}
@@ -91,38 +101,38 @@ export default function Tracks() {
         >
           <Card 
             variant="glass" 
-            className="p-8 rounded-2xl max-w-4xl mx-4 max-h-[80vh] overflow-y-auto"
+            className="p-8 rounded-2xl challenge-card max-w-4xl mx-4 max-h-[80vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-3xl font-bold theme-accent-cyan-soft">{currentChallenge.title}</h3>
+              <h3 className="text-3xl font-bold theme-font-subheading theme-text-primary">{currentChallenge.title}</h3>
               <button 
                 onClick={closeChallengeModal} 
-                className="theme-text-muted theme-interactive text-2xl"
+                className="theme-interactive text-2xl"
                 aria-label="Cerrar modal"
               >
                 &times;
               </button>
             </div>
-            <p className="theme-accent-purple-soft mb-4 font-semibold">{currentChallenge.subtitle}</p>
+            <p className="theme-text-secondary theme-font-subheading mb-4 font-semibold">{currentChallenge.subtitle}</p>
             
-            <h4 className="text-xl font-bold theme-accent-cyan mb-2">Problema:</h4>
-            <p className="theme-text-tertiary mb-6 whitespace-pre-line leading-relaxed">{currentChallenge.problem}</p>
+            <h4 className="text-xl font-bold theme-font-subheading theme-text-primary mb-2">Problema:</h4>
+            <p className="theme-font-primary mb-6 whitespace-pre-line leading-relaxed">{currentChallenge.problem}</p>
             
             {currentChallenge.objective && (
               <>
-                <h4 className="text-xl font-bold theme-accent-cyan mb-2">Objetivo:</h4>
-                <p className="theme-text-tertiary mb-6 leading-relaxed">{currentChallenge.objective}</p>
+                <h4 className="text-xl font-bold theme-font-subheading theme-text-primary mb-2">Objetivo:</h4>
+                <p className="theme-font-primary mb-6 leading-relaxed">{currentChallenge.objective}</p>
               </>
             )}
 
             {currentChallenge.synergy && currentChallenge.synergy.length > 0 && (
               <>
-                <h4 className="text-xl font-bold theme-accent-purple mb-2">Sinergia Interdisciplinaria:</h4>
-                <ul className="theme-text-tertiary mb-6 list-disc list-inside">
+                <h4 className="text-xl font-bold theme-font-subheading theme-text-primary mb-2">Sinergia Interdisciplinaria:</h4>
+                <ul className="theme-font-primary mb-6 list-disc list-inside">
                   {currentChallenge.synergy.map((item, index) => (
                     <li key={index}>
-                      <strong className={item.role === 'IC' ? 'theme-accent-cyan-soft' : 'theme-accent-pink-soft'}>
+                      <strong className={`${item.role === 'IC' ? 'theme-text-secondary' : 'theme-accent-pink-soft'} theme-font-subheading`}>
                         {item.role}:
                       </strong> {item.description}
                     </li>
@@ -133,8 +143,8 @@ export default function Tracks() {
 
             {currentChallenge.aiValue && (
               <>
-                <h4 className="text-xl font-bold theme-accent-pink mb-2">Valor IA:</h4>
-                <p className="theme-text-tertiary">{currentChallenge.aiValue}</p>
+                <h4 className="text-xl font-bold theme-font-subheading theme-text-primary mb-2">Valor IA:</h4>
+                <p className="theme-text-muted theme-font-primary">{currentChallenge.aiValue}</p>
               </>
             )}
           </Card>

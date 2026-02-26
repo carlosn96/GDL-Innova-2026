@@ -9,12 +9,12 @@ export default function Evaluation() {
     <section id="evaluation" data-section="evaluation" className="site-section py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black theme-text-primary mb-4">
-            <span className="theme-title-gradient bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold theme-font-subheading theme-text-primary mb-4">
+            <span className="theme-text-secondary bg-clip-text text-transparent">
               Criterios de Evaluación
             </span>
           </h2>
-          <p className="theme-text-secondary text-xl">
+          <p className="theme-text-muted theme-font-primary text-xl">
             Evaluación holística del prototipo co-creado
           </p>
         </div>
@@ -24,7 +24,7 @@ export default function Evaluation() {
             <Card 
               key={criterion.id}
               variant="glass"
-              className="p-8 rounded-2xl text-center group hover:scale-105 transition-transform duration-300"
+              className="p-8 rounded-2xl challenge-card text-center group hover:scale-105 transition-transform duration-300"
             >
               <GradientBox
                 gradientFrom={criterion.gradient.from}
@@ -32,14 +32,10 @@ export default function Evaluation() {
                 icon={criterion.icon}
                 className="w-24 h-24 rounded-full mx-auto mb-6"
               />
-              <h3 className={`text-2xl font-bold mb-4 ${
-                criterion.id === 'value-proposition' ? 'theme-accent-cyan-soft' :
-                criterion.id === 'interdependence' ? 'theme-accent-purple-soft' :
-                criterion.id === 'ai-execution' ? 'theme-accent-pink-soft' : 'theme-accent-cyan-soft'
-              }`}>
+              <h3 className="text-2xl font-bold theme-font-subheading theme-text-primary mb-4">
                 {criterion.title}
               </h3>
-              <p className="theme-text-tertiary leading-relaxed mb-4">
+              <p className="theme-text-muted theme-font-primary leading-relaxed mb-4">
                 {criterion.description}
               </p>
               <Badge 
@@ -56,13 +52,13 @@ export default function Evaluation() {
         </div>
 
         <div className="mt-12">
-          <Card variant="glass" className="p-8 rounded-2xl">
-            <h3 className="text-2xl font-bold theme-text-primary text-center mb-6">
-              <Icon name="fas fa-trophy" className="theme-accent-cyan mr-3" />
-              Jurado Docente
+          <Card variant="glass" className="p-8 rounded-2xl challenge-card">
+            <h3 className="text-2xl font-bold theme-font-subheading theme-text-primary text-center mb-6">
+              <Icon name="fas fa-trophy" className="theme-text-secondary mr-3" />
+              Jurado
             </h3>
-            <p className="theme-text-tertiary text-center leading-relaxed">
-              El jurado docente utilizará una Rúbrica de Integridad Simbiótica bajo estos cuatro criterios clave, asegurando que cada prototipo represente una verdadera sinergia entre la lógica computacional y la creatividad visual, con impacto real en el entorno de Guadalajara.
+            <p className="theme-font-primary text-center leading-relaxed">
+              El jurado utilizará una Rúbrica de Integridad Simbiótica bajo estos cuatro criterios clave, asegurando que cada prototipo represente una verdadera sinergia entre la lógica computacional y la creatividad visual, con impacto real en el entorno de Guadalajara.
             </p>
           </Card>
         </div>
