@@ -1,5 +1,5 @@
 /**
- * Schedule Types - Tipos relacionados con el cronograma del hackathon
+ * Schedule Types - Tipos relacionados con el cronograma del HACKATHON
  */
 
 import { ColorVariant, TimeRange } from './common.types';
@@ -21,6 +21,9 @@ export interface ScheduleDay {
   dayNumber: 1 | 2;
   title: string;
   subtitle: string;
+  dayOfMonth: number;
+  month: string;
+  location: string;
   objective: string;
   color: ColorVariant;
   activities: ScheduleActivity[];

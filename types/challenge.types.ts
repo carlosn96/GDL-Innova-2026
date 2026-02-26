@@ -1,5 +1,5 @@
 /**
- * Challenge Types - Tipos relacionados con los retos del hackathon
+ * Challenge Types - Tipos relacionados con los retos del HACKATHON
  */
 
 import { ColorVariant, IconProps } from './common.types';
