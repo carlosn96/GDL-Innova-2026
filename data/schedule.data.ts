@@ -58,7 +58,7 @@ export const scheduleData: ScheduleDay[] = [
           start: '08:30',
           end: '09:00'
         },
-        description: 'Taller de convergencia — IC y Diseño Gráfico trabajan juntos para alinear visión y enfoque del reto'
+        description: 'Taller de convergencia — Gestión de proyectos'
       },
       {
         id: 'day1-taller2',
@@ -72,7 +72,7 @@ export const scheduleData: ScheduleDay[] = [
           start: '09:00',
           end: '10:00'
         },
-        description: 'IC (Auditorio): Uso ético de la IA en el desarrollo de MVPs · DG (Sala de Juicios Orales): IA como herramienta auxiliar en diseño gráfico y conceptualización creativa',
+        description: 'Uso de la IA como herramienta auxiliar en la codificación de proyectos / Conceptualización e Imagen corporativa',
       },
       {
         id: 'day1-receso',
