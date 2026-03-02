@@ -24,6 +24,28 @@ export async function generateMetadata(): Promise<Metadata> {
       statusBarStyle: "default",
       title: siteConfig.metadata.title as string,
     },
+    openGraph: {
+      title: siteConfig.metadata.title,
+      description: siteConfig.metadata.description,
+      url: siteConfig.url,
+      siteName: siteConfig.name,
+      images: [
+        {
+          url: '/logo.svg',
+          width: 1200,
+          height: 630,
+          alt: siteConfig.metadata.title,
+        },
+      ],
+      locale: 'es_MX',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: siteConfig.metadata.title,
+      description: siteConfig.metadata.description,
+      images: ['/logo.svg'],
+    },
   };
 }
 
