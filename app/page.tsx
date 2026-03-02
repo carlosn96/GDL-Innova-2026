@@ -21,9 +21,8 @@ export default function Home() {
       <Navigation />
       <HeroSection />
       <About />
-      <Schedule />
       <Tracks />
-      <Evaluation />
+      <Schedule />
       <CTA />
       <Footer />
     </main>
