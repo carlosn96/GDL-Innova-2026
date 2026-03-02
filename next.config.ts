@@ -10,7 +10,7 @@ const withPWA = withPWAInit({
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
-  turbopack: false,
+  turbopack: {},
   env: {
     NEXT_PUBLIC_ENV: process.env.NEXT_PUBLIC_ENV ?? process.env.ENV ?? process.env.NODE_ENV,
   },
