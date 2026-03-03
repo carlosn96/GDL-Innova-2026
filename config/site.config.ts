@@ -8,7 +8,7 @@
 export const siteConfig = {
     name: 'HACKATHON',
     description: 'Un espacio de colaboración entre el Diseño Gráfico y la Ingeniería en Computación de la Universidad UNE',
-    url: 'https://gdlinnova.une.edu.mx',
+    url: 'https://hackathon.joannesystem.com',
 
     metadata: {
         title: 'HACKATHON - Estrategia de Co-Creación Interdisciplinaria IA',
