@@ -111,8 +111,8 @@ export const scheduleData: ScheduleDay[] = [
         },
         title: 'Pase de asistencia / Cierre',
         timeRange: {
-          start: '13:00',
-          end: '13:30'
+          start: '13:30',
+          end: '13:40'
         },
         description: 'Registro de salida y cierre de actividades del día 1'
       }
