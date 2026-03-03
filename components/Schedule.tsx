@@ -53,10 +53,12 @@ export default function Schedule() {
                   <div className="space-y-3">
                     {day.activities.map((activity) => (
                       <div key={activity.id} className={`rounded-xl p-4 transition-all duration-300 hover:scale-[1.01] ${activity.isSpecial ? 'border theme-border-muted' : 'border border-white/5'}`} style={{ background: 'rgba(255,255,255,0.03)' }}>
-                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-[auto_7rem_1fr] sm:items-center sm:gap-4">
-                          <GradientBox icon={activity.icon} gradientFrom={activity.gradient.from} gradientTo={activity.gradient.to} size="md" shape="rounded" iconColor="theme-text" />
-                          <p className="text-xl">{formatTimeRange(activity.timeRange.start, activity.timeRange.end)}</p>
-                          <div className="flex flex-col items-start text-left gap-1">
+                        <div className="sm:grid sm:grid-cols-[auto_7rem_1fr] sm:items-center sm:gap-4">
+                          <div className="flex items-center gap-3 sm:contents">
+                            <GradientBox icon={activity.icon} gradientFrom={activity.gradient.from} gradientTo={activity.gradient.to} size="md" shape="rounded" iconColor="theme-text" />
+                            <p className="text-xl">{formatTimeRange(activity.timeRange.start, activity.timeRange.end)}</p>
+                          </div>
+                          <div className="flex flex-col items-start text-left gap-1 mt-2 sm:mt-0">
                             <h4 className="theme-font-subheading font-bold text-xl theme-text-primary">{activity.title}</h4>
                             <p className="theme-text-muted theme-font-primary text-xs max-w-none">{activity.description}</p>
                           </div>
