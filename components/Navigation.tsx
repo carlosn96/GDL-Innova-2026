@@ -31,7 +31,7 @@ export default function Navigation() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="theme-accent-cyan-soft theme-font-primary theme-interactive transition"
+                  className="theme-accent-cyan-soft theme-font-primary theme-interactive transition font-bold"
                 >
                   {link.label}
                 </a>
@@ -58,7 +58,7 @@ export default function Navigation() {
               <a
                 key={link.href}
                 href={link.href}
-                  className="mobile-menu-link block px-3 py-2 theme-accent-cyan-soft theme-font-primary theme-interactive"
+                  className="mobile-menu-link block px-3 py-2 theme-accent-cyan-soft theme-font-primary theme-interactive font-bold"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}
