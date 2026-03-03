@@ -10,6 +10,7 @@ export const viewport: Viewport = {
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
+    metadataBase: new URL(siteConfig.url),
     title: siteConfig.metadata.title,
     description: siteConfig.metadata.description,
     keywords: [...siteConfig.metadata.keywords],
