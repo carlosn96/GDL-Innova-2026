@@ -5,7 +5,7 @@ import { avertaBlack, avertaBold, avertaRegular } from "./fonts/fonts";
 import "./globals.css";
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#4a25d6",
 };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: siteConfig.metadata.title,
     description: siteConfig.metadata.description,
     keywords: [...siteConfig.metadata.keywords],
-    manifest: '/manifest.json',
+    manifest: '/manifest.webmanifest',
     icons: {
       icon: '/logo.svg',
       shortcut: '/logo.svg',

@@ -68,19 +68,19 @@ export default function HeroSection() {
         */}
         
         {/* Title */}
-        <h1 className="text-8xl md:text-8xl theme-text-primary theme-font-heading font-black mb-6">
+        <h1 className="text-6xl sm:text-6xl md:text-8xl theme-text-primary theme-font-heading font-black mb-4">
           <span className="bg-clip-text theme-font-heading" style={{ backgroundImage: 'var(--gradient-primary)' }}>
             {siteConfig.name.toUpperCase()}
           </span>
         </h1>
 
         {/* Subtitle */}
-        <h2 className="text-3xl md:text-5xl theme-font-subheading font-bold theme-text-secondary mb-4">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl theme-font-subheading font-bold theme-text-secondary mb-3">
           Co-Creación Interdisciplinaria IA
         </h2>
 
         {/* Description */}
-        <p className="text-center text-xl md:text-3xl theme-font-primary mb-8 whitespace-nowrap">
+        <p className="text-center text-base sm:text-xl md:text-3xl theme-font-primary mb-8 md:whitespace-nowrap">
           Colaboración entre{' '}
           <span className="theme-accent-pink theme-font-subheading font-semibold">
             {siteConfig.organization.departments.design}
