@@ -29,28 +29,6 @@ export default function About() {
           </Card>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-center items-center gap-8 mb-12">
-          <button 
-            onClick={() => setActiveModal('vision')}
-            className="group relative px-8 py-4 bg-white/5 border border-white/20 hover:border-white/50 rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <span className="relative z-10 font-bold font-mono tracking-widest text-lg text-white group-hover:text-purple-300 transition-colors">
-              VER VISIÓN
-            </span>
-          </button>
-
-          <button 
-            onClick={() => setActiveModal('objetivo')}
-            className="group relative px-8 py-4 bg-white/5 border border-white/20 hover:border-white/50 rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-teal-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <span className="relative z-10 font-bold font-mono tracking-widest text-lg text-white group-hover:text-blue-300 transition-colors">
-              VER OBJETIVO
-            </span>
-          </button>
-        </div>
-
         {/* Modal Overlay */}
         {activeModal && (
           <div 
