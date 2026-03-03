@@ -14,6 +14,27 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_ENV: process.env.NEXT_PUBLIC_ENV ?? process.env.ENV ?? process.env.NODE_ENV,
   },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, no-store, must-revalidate',
+          },
+          {
+            key: 'Pragma',
+            value: 'no-cache',
+          },
+          {
+            key: 'Expires',
+            value: '0',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default withPWA(nextConfig);
