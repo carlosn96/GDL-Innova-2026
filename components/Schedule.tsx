@@ -61,6 +61,9 @@ export default function Schedule() {
                           <div className="flex flex-col items-start text-left gap-1 mt-2 sm:mt-0">
                             <h4 className="theme-font-subheading font-bold text-xl theme-text-primary">{activity.title}</h4>
                             <p className="theme-text-muted theme-font-primary text-xs max-w-none">{activity.description}</p>
+                            {activity.link && (
+                              <a href={activity.link} className="text-cyan-400 hover:text-cyan-300 mt-2 font-semibold text-sm inline-flex items-center gap-1 transition-colors">Ver Presentación &rarr;</a>
+                            )}
                           </div>
                         </div>
                       </div>

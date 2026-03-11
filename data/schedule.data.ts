@@ -73,6 +73,7 @@ export const scheduleData: ScheduleDay[] = [
           end: '10:00'
         },
         description: 'Uso de la IA como herramienta auxiliar en la codificación de proyectos / Conceptualización e Imagen corporativa',
+        link: '/taller2',
       },
       {
         id: 'day1-receso',

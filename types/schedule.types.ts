@@ -14,6 +14,7 @@ export interface ScheduleActivity {
   title: string;
   timeRange: TimeRange;
   description: string;
+  link?: string;
   isSpecial?: boolean;
 }
 
